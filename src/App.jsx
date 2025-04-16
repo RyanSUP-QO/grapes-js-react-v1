@@ -1,30 +1,28 @@
-import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router";
 import "./style.css";
-import Sample from "./components/motion_samples/SelectTemplateVTwo";
+import Landing from "./pages/Landing";
+import { Box } from "@mui/material";
+import MenuBar from "./components/MenuBar";
 
 function App() {
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
-      <img
-        src="./image.png"
-        style={{
-          width: "25%",
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+    <BrowserRouter>
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          position: "relative",
         }}
-      />
-      <Sample />
-    </div>
+      >
+        <MenuBar />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          {/* <Route path="/build" element={<OptInEditor />} /> */}
+        </Routes>
+      </Box>
+    </BrowserRouter>
   );
 }
 

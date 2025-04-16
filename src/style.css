@@ -31,8 +31,6 @@ article, aside, details, figcaption, figure,
         }
 body {
   line-height: 1;
-  background-image: url("./assets/circuits.jpg");
-  background-size: cover;
 }
 /* prettier-ignore */
 ol, ul {
