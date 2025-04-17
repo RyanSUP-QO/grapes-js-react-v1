@@ -10,14 +10,14 @@ const qoTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#7918f2", // electric purple
+      main: "#fed044", // electric purple
     },
     secondary: {
       main: "#ff8c3e", // copper glow
     },
     background: {
-      default: "#0f0618", // deep black-violet
-      paper: "#1c0f2f", // lighter panel shade
+      default: "#7918f2", // deep black-violet
+      paper: "#7918f2", // lighter panel shade
     },
     text: {
       primary: "#fef2e2", // warm white
