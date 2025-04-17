@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./style.css";
-import Landing from "./pages/Landing";
 import { Box } from "@mui/material";
 import MenuBar from "./components/MenuBar";
+import AnimatedRoutes from "./components/AnimatedRoutes";
 
 function App() {
   return (
@@ -17,10 +17,7 @@ function App() {
         }}
       >
         <MenuBar />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          {/* <Route path="/build" element={<OptInEditor />} /> */}
-        </Routes>
+        <AnimatedRoutes />
       </Box>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-export const QueenOneCircuits = ({ zIndex }) => {
+export const QueenOneCircuits = ({ zIndex = -1 }) => {
   return (
     <div
       className="circuit"

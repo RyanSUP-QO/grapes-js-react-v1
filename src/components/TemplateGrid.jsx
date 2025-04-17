@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import TemplateCard from "./TemplateCard";
 import { motion, AnimatePresence } from "motion/react";
 import TemplateCardB from "./TemplateCardB";
+import { useNavigate } from "react-router";
 
 const DEMO_TEMPLATES = [
   {
@@ -25,7 +26,6 @@ const templateVariants = {
     },
   },
   activate: {
-    scale: 0,
     opacity: 0,
     transition: {
       delay: 0.7, // 👈 delay until after layout shift
@@ -37,6 +37,11 @@ const templateVariants = {
 
 export default function TemplateGrid() {
   const [selectedTemplate, setSelectedTemplate] = useState();
+  const navigate = useNavigate();
+  function handleClick(template) {
+    setSelectedTemplate(template.id);
+    setTimeout(() => navigate("/THE-TIME-IS-NOW?path=build"), 1000);
+  }
 
   // In the future we will get templates from some data steam
   // const [templates, setTemplates] = useState([]);
@@ -46,6 +51,8 @@ export default function TemplateGrid() {
 
   // TODO: on click - set timeout to navigate to mock load screen (pass actual destination)
   // TODO: Mock load will just be a series of cool animations
+  // - First fade in 2 split panels
+  // - THen split panels open to reveal circuit background
   // TODO: Then navigate to the actual destination (Can use this time to load brandsphere assets)
 
   return (
@@ -66,10 +73,7 @@ export default function TemplateGrid() {
             <Typography variant="h5" fontWeight="bold" textAlign="center">
               {t.id}
             </Typography>
-            <Button
-              sx={{ width: "100%" }}
-              onClick={() => setSelectedTemplate(t.id)}
-            >
+            <Button sx={{ width: "100%" }} onClick={() => handleClick(t)}>
               {t.render()}
             </Button>
           </motion.li>
