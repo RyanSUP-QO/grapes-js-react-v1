@@ -12,7 +12,7 @@ export default function TriggerDashboard() {
         height: "100%",
       }}
     >
-      <Typography variant="h1">EVENTS</Typography>
+      <Typography variant="h1">EVENTS & TRIGGERS</Typography>
       <Box
         sx={{
           display: "flex",

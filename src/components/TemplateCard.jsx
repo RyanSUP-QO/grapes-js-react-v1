@@ -1,8 +1,8 @@
-import { Card, CardContent, Typography, Button, Grid } from "@mui/material";
+import { Card, CardContent, Typography, Grid } from "@mui/material";
 
 export default function TemplateCard({ title }) {
   return (
-    <Card>
+    <Card sx={{ minWidth: 500 }}>
       <CardContent>
         <Grid
           container
@@ -20,8 +20,8 @@ export default function TemplateCard({ title }) {
         </Grid>
         <br />
         <Typography variant="h5">{title}</Typography>
-        <Typography gutterBottom fontSize={14}>
-          Queen One recommends this for so on and yada yada
+        <Typography textTransform="none" gutterBottom fontSize={14}>
+          PERFORMANT. ACCESSIBLE. CROSS-PLATFORM.
         </Typography>
       </CardContent>
     </Card>

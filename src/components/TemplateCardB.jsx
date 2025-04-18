@@ -10,7 +10,7 @@ import {
 
 export default function TemplateCardB() {
   return (
-    <Card>
+    <Card sx={{ minWidth: 500 }}>
       <CardContent>
         <Grid
           container
@@ -23,8 +23,9 @@ export default function TemplateCardB() {
           />
         </Grid>
         <br />
-        <Typography gutterBottom fontSize={14}>
-          Queen One recommends this for so on and yada yada
+        <Typography textTransform="none" gutterBottom fontSize={14}>
+          Build what you want but Queen One isn't responsible if it isn't
+          performant / responsive
         </Typography>
       </CardContent>
     </Card>

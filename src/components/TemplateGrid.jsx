@@ -46,13 +46,13 @@ export default function TemplateGrid() {
           </Button>
         </motion.li>
         <motion.li
-          key={"QUEEN ONE HERO"}
+          key={"BREAK THE GLASS"}
           variants={templateVariants}
           exit={{ opacity: 0, scale: 0.9 }}
           whileHover={{ scale: 1.02 }}
         >
           <Typography variant="h5" fontWeight="bold" textAlign="center">
-            {"QUEEN ONE HERO"}
+            {"BREAK THE GLASS"}
           </Typography>
           <Button
             sx={{ width: "100%" }}

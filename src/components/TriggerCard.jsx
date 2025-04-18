@@ -74,7 +74,7 @@ export default function TriggerCard({ title }) {
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          onClick={() => navigate("/build")}
+          onClick={() => navigate("/bistro")}
           variant="contained"
           startIcon={<EditIcon />}
           sx={{ flexGrow: 1 }}

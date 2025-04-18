@@ -60,14 +60,24 @@ export default (editor, opts = {}) => {
     }
   `;
 
-  // Inject styles into canvas
-  // * I like this way of defining the overal modal styles as opposed to adding the classes and definitions to the components.
-
+  // Inject mikes styles into canvas
+  // * I like this way of defining the modal styles as opposed to adding the classes and definitions to the components.
   editor.on("load", () => {
     const style = document.createElement("style");
     style.innerHTML = modalCSS;
     editor.Canvas.getDocument().head.appendChild(style);
+    editor.addComponents({
+      type: "queen-one-modal",
+    });
   });
+
+  // Could be part of the "Queen one plugin" eventually
+  editor.setStyle(`
+    body {
+      background-image: url('/circuits.jpg');
+      background-size: contain;
+    }
+  `);
 
   // Register the block
   editor.BlockManager.add("queen-one-modal", {
