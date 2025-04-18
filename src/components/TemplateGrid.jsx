@@ -5,11 +5,11 @@ import TemplateCardB from "./TemplateCardB";
 
 const DEMO_TEMPLATES = [
   {
-    id: "QUEEN ONE GOLD STANDARD",
+    id: "QUEEN ONE GOLDEN STANDARD",
     render: (props) => <TemplateCard {...props} />,
   },
   {
-    id: "QUEEN ONE EXPRESS",
+    id: "QUEEN ONE HERO",
     render: (props) => <TemplateCardB {...props} />,
   },
 ];

@@ -57,7 +57,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 export default function TriggerCard({ onClick, title }) {
   return (
-    <Card sx={{ width: 250 }}>
+    <Card sx={{ width: 350 }}>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           {title}

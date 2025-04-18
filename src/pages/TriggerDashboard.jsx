@@ -14,7 +14,7 @@ export default function TriggerDashboard() {
         height: "100%",
       }}
     >
-      <Typography variant="h1">TRIGGERS</Typography>
+      <Typography variant="h1">MODAL TRIGGERS</Typography>
       <Box
         sx={{
           display: "flex",
@@ -25,13 +25,13 @@ export default function TriggerDashboard() {
       >
         <motion.div whileHover={{ scale: 1.02 }}>
           <TriggerCard
-            title="New user email capture"
+            title="New user enters site"
             onClick={() => navigate("/templates")}
           />
         </motion.div>
         <motion.div whileHover={{ scale: 1.02 }}>
           <TriggerCard
-            title="Meta data capture"
+            title="Customer birthday month"
             onClick={() => navigate("/templates")}
           />
         </motion.div>
