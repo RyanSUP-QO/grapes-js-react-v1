@@ -1,9 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import TemplateGrid from "../components/TemplateGrid";
-import { useNavigate } from "react-router";
 
 export default function TemplateSelect() {
-  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -15,7 +13,7 @@ export default function TemplateSelect() {
       }}
     >
       <Typography variant="h1">CHOOSE A TEMPLATE</Typography>
-      <TemplateGrid onTemplateSelect={() => navigate("/build")} />
+      <TemplateGrid />
     </Box>
   );
 }

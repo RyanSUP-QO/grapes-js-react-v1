@@ -7,7 +7,10 @@ import {
   Button,
   CardActions,
 } from "@mui/material";
+
+import EditIcon from "@mui/icons-material/Edit";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router";
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
@@ -55,7 +58,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function TriggerCard({ onClick, title }) {
+export default function TriggerCard({ title }) {
+  const navigate = useNavigate();
   return (
     <Card sx={{ width: 350 }}>
       <CardContent>
@@ -64,27 +68,25 @@ export default function TriggerCard({ onClick, title }) {
         </Typography>
         <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
           <Typography>Off</Typography>
-          <AntSwitch disabled />
+          <AntSwitch />
           <Typography>Active</Typography>
         </Stack>
-        <Typography gutterBottom color="warning" fontSize={14}>
-          Creatives are required to activate this trigger!
-        </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          onClick={onClick}
-          variant="outlined"
-          sx={{ borderStyle: "dashed" }}
+          onClick={() => navigate("/build")}
+          variant="contained"
+          startIcon={<EditIcon />}
+          sx={{ flexGrow: 1 }}
         >
-          + Creative
+          A
         </Button>
         <Button
-          onClick={onClick}
+          onClick={() => navigate("/templates")}
           variant="outlined"
-          sx={{ borderStyle: "dashed" }}
+          sx={{ borderStyle: "dashed", flexGrow: 1 }}
         >
-          + Creative
+          + B
         </Button>
       </CardActions>
     </Card>

@@ -45,10 +45,10 @@ export default function AnimatedRoutes() {
         <Route
           path="/build"
           element={
-            <FadeInAnimationWrapper>
+            <>
               <CurtainAnimation />
               <OptInEditor />
-            </FadeInAnimationWrapper>
+            </>
           }
         />
       </Routes>

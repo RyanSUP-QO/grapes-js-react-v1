@@ -2,17 +2,7 @@ import { Button, Typography } from "@mui/material";
 import TemplateCard from "./TemplateCard";
 import { motion, AnimatePresence } from "motion/react";
 import TemplateCardB from "./TemplateCardB";
-
-const DEMO_TEMPLATES = [
-  {
-    id: "QUEEN ONE GOLDEN STANDARD",
-    render: (props) => <TemplateCard {...props} />,
-  },
-  {
-    id: "QUEEN ONE HERO",
-    render: (props) => <TemplateCardB {...props} />,
-  },
-];
+import { useNavigate } from "react-router";
 
 const templateVariants = {
   show: {
@@ -25,31 +15,52 @@ const templateVariants = {
   },
 };
 
-export default function TemplateGrid({ onTemplateSelect }) {
+export default function TemplateGrid() {
   // In the future we will get templates from some data steam
   // const [templates, setTemplates] = useState([]);
   // useEffect(() => {
   //   const fetchTemplates = () => setTemplates(someAPI);
   // }, []);
 
+  const navigate = useNavigate();
+
   return (
     <motion.ul style={{ display: "flex" }}>
       <AnimatePresence>
-        {DEMO_TEMPLATES.map((t) => (
-          <motion.li
-            key={t.id}
-            variants={templateVariants}
-            exit={{ opacity: 0, scale: 0.9 }}
-            whileHover={{ scale: 1.02 }}
+        <motion.li
+          key={"QUEEN ONE GOLDEN STANDARD"}
+          variants={templateVariants}
+          exit={{ opacity: 0, scale: 0.9 }}
+          whileHover={{ scale: 1.02 }}
+        >
+          <Typography variant="h5" fontWeight="bold" textAlign="center">
+            {"QUEEN ONE GOLDEN STANDARD"}
+          </Typography>
+          <Button
+            sx={{ width: "100%" }}
+            onClick={() =>
+              navigate("/build?template=QUEEN_ONE_GOLDEN_STANDARD")
+            }
           >
-            <Typography variant="h5" fontWeight="bold" textAlign="center">
-              {t.id}
-            </Typography>
-            <Button sx={{ width: "100%" }} onClick={() => onTemplateSelect(t)}>
-              {t.render()}
-            </Button>
-          </motion.li>
-        ))}
+            <TemplateCard />
+          </Button>
+        </motion.li>
+        <motion.li
+          key={"QUEEN ONE HERO"}
+          variants={templateVariants}
+          exit={{ opacity: 0, scale: 0.9 }}
+          whileHover={{ scale: 1.02 }}
+        >
+          <Typography variant="h5" fontWeight="bold" textAlign="center">
+            {"QUEEN ONE HERO"}
+          </Typography>
+          <Button
+            sx={{ width: "100%" }}
+            onClick={() => navigate("/build?template=QUEEN_ONE_HERO")}
+          >
+            <TemplateCardB />
+          </Button>
+        </motion.li>
       </AnimatePresence>
     </motion.ul>
   );
