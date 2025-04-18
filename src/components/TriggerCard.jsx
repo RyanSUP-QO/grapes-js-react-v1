@@ -6,8 +6,6 @@ import {
   Switch,
   Button,
   CardActions,
-  Badge,
-  Tooltip,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -57,41 +55,38 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function TriggerCard({ onClick }) {
+export default function TriggerCard({ onClick, title }) {
   return (
-    <Badge color="warning" badgeContent="!">
-      <Card sx={{ width: 250 }}>
-        <CardContent>
-          <Typography gutterBottom color="warning" fontSize={14}>
-            Creatives are required to activate this trigger!
-          </Typography>
-          <Typography variant="h5">New User Capture</Typography>
-          <Typography gutterBottom fontSize={14}>
-            Grow your audience, grow your brand!
-          </Typography>
-          <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-            <Typography>Off</Typography>
-            <AntSwitch disabled />
-            <Typography>Active</Typography>
-          </Stack>
-        </CardContent>
-        <CardActions>
-          <Button
-            onClick={onClick}
-            variant="outlined"
-            sx={{ borderStyle: "dashed" }}
-          >
-            + Creative
-          </Button>
-          <Button
-            onClick={onClick}
-            variant="outlined"
-            sx={{ borderStyle: "dashed" }}
-          >
-            + Creative
-          </Button>
-        </CardActions>
-      </Card>
-    </Badge>
+    <Card sx={{ width: 250 }}>
+      <CardContent>
+        <Typography variant="h5" gutterBottom>
+          {title}
+        </Typography>
+        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+          <Typography>Off</Typography>
+          <AntSwitch disabled />
+          <Typography>Active</Typography>
+        </Stack>
+        <Typography gutterBottom color="warning" fontSize={14}>
+          Creatives are required to activate this trigger!
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          onClick={onClick}
+          variant="outlined"
+          sx={{ borderStyle: "dashed" }}
+        >
+          + Creative
+        </Button>
+        <Button
+          onClick={onClick}
+          variant="outlined"
+          sx={{ borderStyle: "dashed" }}
+        >
+          + Creative
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

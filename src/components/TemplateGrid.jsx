@@ -1,9 +1,7 @@
-import { Grid, Button, Typography, Box } from "@mui/material";
-import { useState, useEffect } from "react";
+import { Button, Typography } from "@mui/material";
 import TemplateCard from "./TemplateCard";
 import { motion, AnimatePresence } from "motion/react";
 import TemplateCardB from "./TemplateCardB";
-import { useNavigate } from "react-router";
 
 const DEMO_TEMPLATES = [
   {
@@ -25,55 +23,29 @@ const templateVariants = {
       type: "spring",
     },
   },
-  activate: {
-    opacity: 0,
-    transition: {
-      delay: 0.7, // 👈 delay until after layout shift
-      duration: 0.4,
-      type: "spring",
-    },
-  },
 };
 
-export default function TemplateGrid() {
-  const [selectedTemplate, setSelectedTemplate] = useState();
-  const navigate = useNavigate();
-  function handleClick(template) {
-    setSelectedTemplate(template.id);
-    setTimeout(() => navigate("/THE-TIME-IS-NOW?path=build"), 1000);
-  }
-
+export default function TemplateGrid({ onTemplateSelect }) {
   // In the future we will get templates from some data steam
   // const [templates, setTemplates] = useState([]);
   // useEffect(() => {
   //   const fetchTemplates = () => setTemplates(someAPI);
   // }, []);
 
-  // TODO: on click - set timeout to navigate to mock load screen (pass actual destination)
-  // TODO: Mock load will just be a series of cool animations
-  // - First fade in 2 split panels
-  // - THen split panels open to reveal circuit background
-  // TODO: Then navigate to the actual destination (Can use this time to load brandsphere assets)
-
   return (
     <motion.ul style={{ display: "flex" }}>
       <AnimatePresence>
-        {DEMO_TEMPLATES.filter(
-          (t) => !selectedTemplate || t.id === selectedTemplate
-        ).map((t) => (
+        {DEMO_TEMPLATES.map((t) => (
           <motion.li
             key={t.id}
-            layout
             variants={templateVariants}
-            initial="show"
-            animate={t.id === selectedTemplate ? "activate" : "show"}
             exit={{ opacity: 0, scale: 0.9 }}
-            whileHover={t.id !== selectedTemplate ? { scale: 1.02 } : undefined}
+            whileHover={{ scale: 1.02 }}
           >
             <Typography variant="h5" fontWeight="bold" textAlign="center">
               {t.id}
             </Typography>
-            <Button sx={{ width: "100%" }} onClick={() => handleClick(t)}>
+            <Button sx={{ width: "100%" }} onClick={() => onTemplateSelect(t)}>
               {t.render()}
             </Button>
           </motion.li>
