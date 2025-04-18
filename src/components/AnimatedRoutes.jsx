@@ -5,7 +5,21 @@ import { motion } from "motion/react";
 
 import TemplateSelect from "../pages/TemplateSelect";
 import { AnimatePresence } from "motion/react";
-import Curtains from "./Curtains";
+import CurtainAnimation from "./CurtainAnimation";
+
+function FadeInAnimationWrapper({ children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      style={{ height: "100%" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function AnimatedRoutes() {
   const location = useLocation();
@@ -15,44 +29,26 @@ export default function AnimatedRoutes() {
         <Route
           path="/"
           element={
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ height: "100%" }}
-            >
+            <FadeInAnimationWrapper>
               <TriggerDashboard />
-            </motion.div>
+            </FadeInAnimationWrapper>
           }
         />
         <Route
           path="/templates"
           element={
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ height: "100%" }}
-            >
+            <FadeInAnimationWrapper>
               <TemplateSelect />
-            </motion.div>
+            </FadeInAnimationWrapper>
           }
         />
         <Route
           path="/build"
           element={
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ height: "100%" }}
-            >
-              <Curtains />
+            <FadeInAnimationWrapper>
+              <CurtainAnimation />
               <OptInEditor />
-            </motion.div>
+            </FadeInAnimationWrapper>
           }
         />
       </Routes>

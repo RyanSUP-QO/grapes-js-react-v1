@@ -2,7 +2,6 @@ import grapesjs from "grapesjs";
 import GjsEditor, { Canvas } from "@grapesjs/react";
 import { Grid } from "@mui/material";
 import { BlocksProvider } from "@grapesjs/react";
-import BlockToolbar from "./BlockToolbar";
 import queenOneModal from "../plugins/queenOneModal";
 
 export default function OptInEditor() {
@@ -33,11 +32,6 @@ export default function OptInEditor() {
         </Grid>
         <Grid size={6}>
           <Canvas />
-        </Grid>
-        <Grid size={3}>
-          <BlocksProvider>
-            {(props) => <BlockToolbar {...props} />}
-          </BlocksProvider>
         </Grid>
       </Grid>
     </GjsEditor>

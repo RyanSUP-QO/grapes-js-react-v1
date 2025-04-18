@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 
-// Just a cool loading screen
-export default function Curtains() {
+export default function CurtainAnimation() {
   return (
     <AnimatePresence>
       <motion.div
@@ -9,7 +8,7 @@ export default function Curtains() {
         className="curtains"
         animate={{ x: ["0%", "-100%"] }}
         transition={{
-          duration: 1, // slow and smooth
+          duration: 1,
           ease: "easeInOut",
         }}
         style={{
@@ -26,7 +25,7 @@ export default function Curtains() {
         className="curtains"
         animate={{ x: ["0%", "100%"] }}
         transition={{
-          duration: 1, // slow and smooth
+          duration: 1,
           ease: "easeInOut",
         }}
         style={{
