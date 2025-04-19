@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import TemplateSelect from "../pages/TemplateSelect";
 import { AnimatePresence } from "motion/react";
 import CurtainAnimation from "./CurtainAnimation";
-import MoriciModalBistro from "../pages/MoriciModalBistro";
 
 function FadeInAnimationWrapper({ children }) {
   return (
@@ -49,15 +48,6 @@ export default function AnimatedRoutes() {
             <>
               <CurtainAnimation />
               <OptInEditor />
-            </>
-          }
-        />
-        <Route
-          path="/bistro"
-          element={
-            <>
-              <CurtainAnimation />
-              <MoriciModalBistro />
             </>
           }
         />

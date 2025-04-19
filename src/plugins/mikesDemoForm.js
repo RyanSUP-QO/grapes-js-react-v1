@@ -1,0 +1,207 @@
+export const form = {
+  css: `
+html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          font-size: 100%;
+          font: inherit;
+          vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        /* prettier-ignore */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+          display: block;
+        }
+        body {
+          line-height: 1;
+        }
+        /* prettier-ignore */
+        ol, ul {
+          list-style: none;
+        }
+        /* prettier-ignore */
+        blockquote, q {
+          quotes: none;
+        }
+        /* prettier-ignore */
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+          content: '';
+          content: none;
+        }
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+        }
+
+        /* Queen One Modal Styles */
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .container {
+          position: fixed;
+          inset: 0;
+          display: flex;
+          z-index: 2;
+          padding: 6px;
+        }
+
+        .container[aria-hidden="true"] {
+          display: none;
+        }
+
+        .overlay {
+          position: fixed;
+          inset: 0;
+          background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .dialog-frame {
+          position: relative; /* close button should be relative to the frame */
+          z-index: 2; /* make sure the content frame sits on top of the overlay. */
+          display: flex;
+          width: 320px;
+          min-height: 480px; /* min-height so that content can expand the height if necessary */
+          margin: auto;
+          background-color: #fff; /* default bg color */
+        }
+
+        @media screen and (min-width: 800px) {
+          .dialog-frame {
+            width: 800px;
+            min-height: 600px;
+          }
+
+          .dialog-frame__layout-split-image {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+          }
+        }
+
+        .floating-close-button {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 38px;
+          height: 38px;
+          border-radius: 20px;
+          border: 2px solid transparent;
+          transition: all 0.2s ease-in-out;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          background: none;
+          padding: 0;
+          margin: 0;
+          font: inherit;
+        }
+        .floating-close-button:focus,
+        .floating-close-button:hover {
+          border-color: #000000;
+          outline: none;
+        }
+
+        .primary-image {
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+
+        @media screen and (min-width: 800px) {
+          .primary-image {
+            background-image: url("https://cdn.rejoiner.com/2a38f41cd9c145f6a23fb478ff2255c7/lib/pluginId_2a38f41cd9c145f6a23fb478ff2255c7_images/gdJoGxa/forms/bg1.png");
+          }
+        }
+
+        .primary-content-zone {
+          display: flex;
+        }
+
+        .primary-content {
+          display: grid;
+          grid-auto-rows: max-content;
+          gap: 1rem;
+          margin: auto;
+          padding: 20px 40px;
+          text-align: center;
+        }
+`,
+  html: `
+<div
+        id="qom-1234"
+        aria-labelledby="modal-title"
+        aria-hidden="true"
+        class="container"
+      >
+        <div class="overlay" data-a11y-dialog-hide></div>
+        <div
+          class="dialog-frame dialog-frame__layout-split-image"
+          role="document"
+        >
+          <button
+            type="button"
+            class="floating-close-button"
+            aria-label="Close dialog"
+            data-a11y-dialog-hide
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="#000000"
+              aria-hidden="true"
+            >
+              <path
+                d="M11.4129 10.2202L11.3669 10.1801L7.10172 5.99243L11.081 2.08553L11.0708 2.0755L11.4793 1.68331C11.6342 1.53456 11.7227 1.32677 11.7227 1.11229C11.7227 0.672741 11.3584 0.315643 10.9113 0.315643C10.6662 0.315643 10.4353 0.42372 10.2781 0.612574L10.2401 0.653799L5.94704 4.86877L1.97573 0.980813L1.96949 0.986942L1.56776 0.592519C1.41513 0.442661 1.21086 0.360211 0.992977 0.360211C0.545857 0.360211 0.18158 0.717865 0.18158 1.15686C0.18158 1.40142 0.292792 1.6276 0.486846 1.77746L0.537346 1.82147L4.80257 6.00914L0.824456 9.91493L0.834669 9.92496L0.424999 10.3183C0.270096 10.467 0.18158 10.6748 0.18158 10.8893C0.18158 11.3288 0.545857 11.6859 0.992977 11.6859C1.2381 11.6859 1.46903 11.5779 1.62621 11.389L1.66422 11.3478L5.95782 7.13225L9.92232 11.0247L9.92799 11.0191L10.3314 11.4152C10.4841 11.565 10.6883 11.6475 10.9062 11.6475C11.3533 11.6475 11.7176 11.2898 11.7176 10.8508C11.721 10.6041 11.6098 10.3762 11.4135 10.2208L11.4129 10.2202Z"
+                fill="currentcolor"
+              />
+            </svg>
+          </button>
+          <div class="primary-image"></div>
+          <div class="primary-content-zone">
+            <form class="primary-content">
+              <h2 id="modal-title">
+                <span>Elevate Your Cocktails</span>
+                With 10% Off
+              </h2>
+              <p>
+                Receive 10% off your first order when you join our email list
+                along with special promotions, curated playlists, and first
+                access to new products and limited runs.
+              </p>
+              <input
+                name="email"
+                class="form-wrapper-input"
+                type="email"
+                placeholder="Enter Email"
+                required=""
+              />
+              <input
+                class="form-wrapper-submit"
+                type="submit"
+                value="To The Bitters"
+              />
+              <button type="button" data-a11y-dialog-hide>No thanks</button>
+            </form>
+          </div>
+        </div>
+      </div>
+`,
+};
