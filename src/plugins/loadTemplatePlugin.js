@@ -46,6 +46,7 @@ const lockDragAndDropOnKeyElements = (editor) => {
   }
 };
 
+// ? How are templates loaded?
 export default function loadTemplatePlugin(editor) {
   // Set badass background (in the future this could be client website preview)
   editor.setStyle(`
@@ -56,16 +57,44 @@ export default function loadTemplatePlugin(editor) {
   `);
 
   // Add template html and css from Mikes modal
+  // ? I'm doing many things programatically that should be handled in the component definition
   editor.on("load", () => {
-    editor.addComponents(form.html);
+    editor.DomComponents.addType("Modal", {
+      isComponent: (el) => el.classList?.contains("container"),
+      model: {
+        defaults: {
+          tagName: "div",
+          attributes: {
+            class: "container",
+          },
+        },
+      },
+    });
+
+    editor.Blocks.add("Modal", {
+      label: "Queen One Modal",
+      content: {
+        type: "Modal", // <-- this matches your custom component type
+        // optional: pass additional props if needed
+        components: [
+          {
+            tagName: "p",
+            content: "This is a custom modal",
+          },
+        ],
+      },
+    });
+
+    // editor.addComponents(form.html);
     editor.setStyle(form.css);
 
     // Example of how to limit styles programatticlly
-    const target = editor.getWrapper().find(".form-wrapper-input")[0];
-    if (target) {
-      target.set("stylable", ["color", "font-size"]);
-    }
-    removeAriaHidden(editor);
-    lockDragAndDropOnKeyElements(editor);
+    // const target = editor.getWrapper().find(".form-wrapper-input")[0];
+    // if (target) {
+    //   target.set("stylable", ["color", "font-size"]);
+    // }
+
+    // removeAriaHidden(editor);
+    // lockDragAndDropOnKeyElements(editor);
   });
 }

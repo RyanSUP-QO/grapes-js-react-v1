@@ -1,17 +1,24 @@
 import grapesjs from "grapesjs";
 import GjsEditor, { Canvas } from "@grapesjs/react";
 import { Grid, Tab, Tabs, Typography } from "@mui/material";
-import { StylesProvider, LayersProvider } from "@grapesjs/react";
+import {
+  StylesProvider,
+  LayersProvider,
+  BlocksProvider,
+} from "@grapesjs/react";
 import queenOneModal from "../plugins/queenOneModal";
 import StyleManager from "./StyleManager";
 import loadTemplatePlugin from "../plugins/loadTemplatePlugin";
 import { useState } from "react";
 import LayerManager from "./LayerManager";
+import CustomBlockManager from "./CustomBlockManager";
+import OptInFormBuilder from "../plugins/OptInFormBuilder";
 
 export default function OptInEditor() {
   const [selectedTab, setSelectedTab] = useState(0);
   const onEditor = (editor) => {
     console.log("Editor loaded", { editor });
+    window.editor = editor;
   };
 
   return (
@@ -29,9 +36,9 @@ export default function OptInEditor() {
           id: "gjs-blocks-basic",
           src: "https://unpkg.com/grapesjs-blocks-basic",
         },
-        // queenOneModal,
-        loadTemplatePlugin,
+        OptInFormBuilder,
       ]}
+      waitReady
     >
       <Grid container spacing={0}>
         <Grid size={3}>
@@ -41,7 +48,7 @@ export default function OptInEditor() {
             variant="fullWidth"
           >
             <Tab label="Style" />
-            <Tab label="Layers" />
+            <Tab label="Blocks" />
           </Tabs>
           {selectedTab === 0 && (
             <StylesProvider>
@@ -49,9 +56,9 @@ export default function OptInEditor() {
             </StylesProvider>
           )}
           {selectedTab === 1 && (
-            <LayersProvider>
-              {(props) => <LayerManager {...props} />}
-            </LayersProvider>
+            <BlocksProvider>
+              {(props) => <CustomBlockManager {...props} />}
+            </BlocksProvider>
           )}
         </Grid>
         <Grid size={9}>
