@@ -19,7 +19,6 @@ import {
 } from "@mui/material";
 
 export default function StyleManager({ sectors }) {
-
   const handlePropertyChange = (property, value) => {
     property.upValue(value);
   };
@@ -29,7 +28,7 @@ export default function StyleManager({ sectors }) {
     const defValue = property.getDefaultValue();
     const hasValue = property.hasValue();
     const value = property.getValue();
-    const valueString = hasValue ? value : '';
+    const valueString = hasValue ? value : "";
     const canClear = property.canClear();
 
     const onChange = (ev) => {
@@ -41,13 +40,12 @@ export default function StyleManager({ sectors }) {
         placeholder={defValue}
         value={valueString}
         onChange={onChange}
-        size="small"
         fullWidth
       />
     );
 
     switch (type) {
-      case 'radio':
+      case "radio":
         inputToRender = (
           <RadioGroup value={value} onChange={onChange} row>
             {property.getOptions().map((option) => (
@@ -61,7 +59,7 @@ export default function StyleManager({ sectors }) {
           </RadioGroup>
         );
         break;
-      case 'select':
+      case "select":
         inputToRender = (
           <FormControl fullWidth size="small">
             <Select value={value} onChange={onChange}>
@@ -77,7 +75,7 @@ export default function StyleManager({ sectors }) {
           </FormControl>
         );
         break;
-      case 'color':
+      case "color":
         inputToRender = (
           <TextField
             fullWidth
@@ -90,23 +88,25 @@ export default function StyleManager({ sectors }) {
                 <InputAdornment position="start">
                   <div
                     style={{
-                      width: '15px',
-                      height: '15px',
-                      borderRadius: '3px',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      width: "15px",
+                      height: "15px",
+                      borderRadius: "3px",
+                      border: "1px solid rgba(255,255,255,0.1)",
                       backgroundColor: value || defValue,
                     }}
                   >
                     <input
                       type="color"
                       style={{
-                        width: '15px',
-                        height: '15px',
-                        cursor: 'pointer',
+                        width: "15px",
+                        height: "15px",
+                        cursor: "pointer",
                         opacity: 0,
                       }}
                       value={value || defValue}
-                      onChange={(ev) => handlePropertyChange(property, ev.target.value)}
+                      onChange={(ev) =>
+                        handlePropertyChange(property, ev.target.value)
+                      }
                     />
                   </div>
                 </InputAdornment>
@@ -115,7 +115,7 @@ export default function StyleManager({ sectors }) {
           />
         );
         break;
-      case 'slider':
+      case "slider":
         inputToRender = (
           <Slider
             size="small"
@@ -128,9 +128,9 @@ export default function StyleManager({ sectors }) {
           />
         );
         break;
-      case 'composite':
+      case "composite":
         inputToRender = (
-          <Box sx={{ p: 2, bgcolor: 'rgba(0,0,0,0.2)', borderRadius: 1 }}>
+          <Box sx={{ p: 2, bgcolor: "rgba(0,0,0,0.2)", borderRadius: 1 }}>
             {property.getProperties().map((prop) => (
               <Box key={prop.getId()} sx={{ mb: 2 }}>
                 {renderPropertyControl(prop)}
@@ -142,14 +142,21 @@ export default function StyleManager({ sectors }) {
     }
 
     return (
-      <Box sx={{ mb: 3, px: 1, width: property.isFull() ? '100%' : '50%' }}>
-        <Box sx={{ display: 'flex', mb: 2, alignItems: 'center', color: canClear ? 'primary.main' : 'inherit' }}>
-          <Typography sx={{ flexGrow: 1, textTransform: 'capitalize' }}>
+      <Box sx={{ mb: 3, px: 1, width: property.isFull() ? "100%" : "50%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            mb: 2,
+            alignItems: "center",
+            color: canClear ? "primary.main" : "inherit",
+          }}
+        >
+          <Typography sx={{ flexGrow: 1, textTransform: "capitalize" }}>
             {property.getLabel()}
           </Typography>
           {canClear && (
             <IconButton size="small" onClick={() => property.clear()}>
-              <ExpandMore sx={{ transform: 'rotate(45deg)' }} />
+              <ExpandMore sx={{ transform: "rotate(45deg)" }} />
             </IconButton>
           )}
         </Box>
@@ -159,7 +166,28 @@ export default function StyleManager({ sectors }) {
   };
 
   return (
-    <div className="gjs-qo-style-manager">
+    <Box 
+      className="gjs-qo-style-manager"
+      sx={{
+        height: 'calc(100vh - 48px)',
+        overflowY: 'auto',
+        scrollbarWidth: 'thin',
+        scrollbarColor: '#888 #f1f1f1',
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: '#f1f1f1',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: '#888',
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          background: '#555',
+        }
+      }}
+    >
       {sectors.map((s) => (
         <Accordion key={s.getId()} disableGutters>
           <AccordionSummary expandIcon={<ExpandMore />}>
@@ -170,6 +198,6 @@ export default function StyleManager({ sectors }) {
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </Box>
   );
 }

@@ -7,9 +7,28 @@ export default function CustomBlockManager({
 }) {
   console.log(mapCategoryBlocks);
   return (
-    <Box sx={{ p: 2 }}>
+    <Box 
+      sx={{ 
+        p: 2,
+        height: 'calc(100vh - 48px)', // Fixed height with some space for header
+        overflowY: 'auto', // Enable vertical scrolling
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: '#f1f1f1',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: '#888',
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          background: '#555',
+        }
+      }}
+    >
       {Array.from(mapCategoryBlocks).map(([category, blocks]) => (
-        <div>
+        <div key={category}>
           <Typography
             variant="h6"
             sx={{
