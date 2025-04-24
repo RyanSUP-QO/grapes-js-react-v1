@@ -152,7 +152,6 @@ export default function (editor) {
     },
   });
 
-  // Modal Title
   dc.addType("Modal Title", {
     isComponent: (el) => el.classList?.contains("modal-title"),
     model: {
@@ -163,10 +162,7 @@ export default function (editor) {
           tabindex: "-1",
         },
         components: [
-          `
-            <span class="prehead">Elevate Your Cocktails</span>
-            With 10% Off
-      `,
+          `<span class="prehead">Elevate Your Cocktails</span>With 10% Off`,
         ],
         styles: `
         .primary-content {
