@@ -1,5 +1,6 @@
 import defineCustomComponentTypes from "./components";
 import addBlocks from "./blocks";
+import components from "./components";
 
 const queenOneResetStyles = `
 html, body, div, span, applet, object, iframe,
@@ -191,42 +192,6 @@ html, body, div, span, applet, object, iframe,
 `;
 
 export default function (editor) {
-  // editor.DomComponents.addType("Dialog", {
-  //   isComponent: (el) => el.classList?.contains("dialog-frame"),
-  //   model: {
-  //     defaults: {
-  //       tagName: "div",
-  //       attributes: {
-  //         class: "dialog-frame",
-  //       },
-  //       components: `
-  //       <button
-  //           type="button"
-  //           class="floating-close-button"
-  //           aria-label="Close dialog"
-  //           data-a11y-dialog-hide
-  //         >
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             width="12"
-  //             height="12"
-  //             viewBox="0 0 12 12"
-  //             aria-hidden="true"
-  //           >
-  //             <path
-  //               d="M11.4129 10.2202L11.3669 10.1801L7.10172 5.99243L11.081 2.08553L11.0708 2.0755L11.4793 1.68331C11.6342 1.53456 11.7227 1.32677 11.7227 1.11229C11.7227 0.672741 11.3584 0.315643 10.9113 0.315643C10.6662 0.315643 10.4353 0.42372 10.2781 0.612574L10.2401 0.653799L5.94704 4.86877L1.97573 0.980813L1.96949 0.986942L1.56776 0.592519C1.41513 0.442661 1.21086 0.360211 0.992977 0.360211C0.545857 0.360211 0.18158 0.717865 0.18158 1.15686C0.18158 1.40142 0.292792 1.6276 0.486846 1.77746L0.537346 1.82147L4.80257 6.00914L0.824456 9.91493L0.834669 9.92496L0.424999 10.3183C0.270096 10.467 0.18158 10.6748 0.18158 10.8893C0.18158 11.3288 0.545857 11.6859 0.992977 11.6859C1.2381 11.6859 1.46903 11.5779 1.62621 11.389L1.66422 11.3478L5.95782 7.13225L9.92232 11.0247L9.92799 11.0191L10.3314 11.4152C10.4841 11.565 10.6883 11.6475 10.9062 11.6475C11.3533 11.6475 11.7176 11.2898 11.7176 10.8508C11.721 10.6041 11.6098 10.3762 11.4135 10.2208L11.4129 10.2202Z"
-  //               fill="currentcolor"
-  //             />
-  //           </svg>
-  //         </button>
-  //       `,
-  //       draggable: false,
-  //       removable: false,
-  //       copyable: false,
-  //     },
-  //   },
-  // });
-
   // editor.DomComponents.addType("Primary Content", {
   //   isComponent: (el) => el.classList?.contains("primary-content"),
   //   model: {
@@ -280,7 +245,13 @@ export default function (editor) {
     editor.setStyle(queenOneResetStyles);
     editor.addComponents({
       type: "Container",
-      components: [{ type: "Overlay" }],
+      components: [
+        { type: "Overlay" },
+        {
+          type: "Dialog Frame",
+          components: [{ type: "Floating Close Button" }],
+        },
+      ],
     });
   });
 
