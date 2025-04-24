@@ -28,4 +28,9 @@ export default function (editor) {
     label: "Text",
     content: `<p>Share your thoughts</p>`,
   });
+
+  editor.Blocks.add("Primary Content", {
+    label: "Primary Content Form",
+    content: [{ type: "Primary Content" }],
+  });
 }
