@@ -33,4 +33,9 @@ export default function (editor) {
     label: "Primary Content Form",
     content: [{ type: "Primary Content" }],
   });
+
+  editor.Blocks.add("Modal Title", {
+    label: "Modal Title",
+    content: [{ type: "Modal Title" }],
+  });
 }

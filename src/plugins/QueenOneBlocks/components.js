@@ -152,6 +152,50 @@ export default function (editor) {
     },
   });
 
+  // Modal Title
+  dc.addType("Modal Title", {
+    isComponent: (el) => el.classList?.contains("modal-title"),
+    model: {
+      defaults: {
+        tagName: "h2",
+        attributes: {
+          class: "modal-title",
+          tabindex: "-1",
+        },
+        components: [
+          `
+            <span class="prehead">Elevate Your Cocktails</span>
+            With 10% Off
+      `,
+        ],
+        styles: `
+        .primary-content {
+          display: grid;
+          grid-auto-rows: max-content;
+          gap: 1.3rem;
+          width: 100%;
+          margin: auto;
+          padding: 20px 40px;
+          text-align: center;
+        }
+
+        @media screen and (min-width: 800px) {
+          .primary-content {
+            width: 50%;
+          }
+        }
+
+        .prehead {
+          display: block;
+          margin-bottom: 0.6em;
+          font-size: 0.36em;
+          text-transform: uppercase;
+        }
+      `,
+      },
+    },
+  });
+
   // Submit button
   dc.addType("", {});
 
@@ -164,9 +208,6 @@ export default function (editor) {
   // Flex Image
   dc.addType("", {});
 
-  // Form (Primary Content)
-  dc.addType("", {});
-
   dc.addType("Primary Content", {
     isComponent: (el) => el.classList?.contains("primary-content"),
     model: {
@@ -177,41 +218,59 @@ export default function (editor) {
         },
         components: [
           `
-<h2 class="modal-title" tabindex="-1">
-  <span class="prehead">Elevate Your Cocktails</span>
-  With 10% Off
-</h2>
-<p>
-  Receive 10% off your first order when you join our email list
-  along with special promotions, curated playlists, and first
-  access to new products and limited runs.
-</p>
-<label for="qom-1234-step-1-email" class="visuallyhidden">
-  Email (required)
-</label>
-<input
-  id="qom-1234-step-1-email"
-  name="email"
-  class="form-wrapper-input input"
-  type="email"
-  placeholder="Enter Email"
-  required
-/>
-<button
-  type="button"
-  class="form-wrapper-submit button"
-  onclick="nextStep('qom-1234')"
->
-  To The Bitters
-</button>
-<button
-  class="unstyled-button"
-  type="button"
-  data-a11y-dialog-hide
->
-  No thanks, I’m not into saving money.
-</button>`,
+          <h2 class="modal-title" tabindex="-1">
+            <span class="prehead">Elevate Your Cocktails</span>
+            With 10% Off
+          </h2>
+          <p>
+            Receive 10% off your first order when you join our email list
+            along with special promotions, curated playlists, and first
+            access to new products and limited runs.
+          </p>
+          <label for="qom-1234-step-1-email" class="visuallyhidden">
+            Email (required)
+          </label>
+          <input
+            id="qom-1234-step-1-email"
+            name="email"
+            class="form-wrapper-input input"
+            type="email"
+            placeholder="Enter Email"
+            required
+          />
+          <button
+            type="button"
+            class="form-wrapper-submit button"
+            onclick="nextStep('qom-1234')"
+          >
+            To The Bitters
+          </button>
+          <button
+            class="unstyled-button"
+            type="button"
+            data-a11y-dialog-hide
+          >
+            No thanks, I’m not into saving money.
+          </button>
+      `,
         ],
+        styles: `
+        .primary-content {
+          display: grid;
+          grid-auto-rows: max-content;
+          gap: 1.3rem;
+          width: 100%;
+          margin: auto;
+          padding: 20px 40px;
+          text-align: center;
+        }
+
+        @media screen and (min-width: 800px) {
+          .primary-content {
+            width: 50%;
+          }
+        }
+      `,
       },
     },
   });
