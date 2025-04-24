@@ -18,4 +18,14 @@ export default function (editor) {
     label: "Floating Close Button",
     content: [{ type: "Floating Close Button" }],
   });
+
+  editor.Blocks.add("Div", {
+    label: "Div",
+    content: `<div></div>`,
+  });
+
+  editor.Blocks.add("Text", {
+    label: "Text",
+    content: `<p>Share your thoughts</p>`,
+  });
 }

@@ -1,7 +1,6 @@
 export default function (editor) {
   const dc = editor.DomComponents;
 
-  // Container
   dc.addType("Container", {
     isComponent: (el) => el.classList?.contains("container"),
     model: {
@@ -37,7 +36,6 @@ export default function (editor) {
     },
   });
 
-  // Overlay
   dc.addType("Overlay", {
     isComponent: (el) => el.classList?.contains("overlay"),
     model: {
@@ -57,7 +55,6 @@ export default function (editor) {
     },
   });
 
-  // Dialog Frame
   dc.addType("Dialog Frame", {
     isComponent: (el) => el.classList?.contains("dialog-frame"),
     model: {
@@ -92,7 +89,6 @@ export default function (editor) {
     },
   });
 
-  // Floating Close Button
   dc.addType("Floating Close Button", {
     isComponent: (el) => el.classList?.contains("floating-close-button"),
     model: {
@@ -156,25 +152,16 @@ export default function (editor) {
     },
   });
 
-  // H2
-  dc.addType("", {});
-
   // Submit button
   dc.addType("", {});
 
   // Decline Button
   dc.addType("", {});
 
-  // Paragraph
-  dc.addType("", {});
-
   // Split Layout -- Only dropable in Dialog frame
   dc.addType("", {});
 
   // Flex Image
-  dc.addType("", {});
-
-  // Flex layout
   dc.addType("", {});
 
   // Form (Primary Content)
