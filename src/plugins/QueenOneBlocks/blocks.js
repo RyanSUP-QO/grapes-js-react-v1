@@ -34,8 +34,13 @@ export default function (editor) {
     content: [{ type: "Primary Content" }],
   });
 
+  editor.Blocks.add("Prehead", {
+    label: "Prehead",
+    content: [{ type: "Prehead" }],
+  });
+
   editor.Blocks.add("Modal Title", {
-    label: "Modal Title",
+    label: "Modal Title with prehead",
     content: [{ type: "Modal Title" }],
   });
 }

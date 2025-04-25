@@ -134,7 +134,7 @@ export default function (editor) {
               2px 2px 6px 3px 6px 3px #ee4484;
           }
         `,
-        components: `
+        content: `
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -152,7 +152,30 @@ export default function (editor) {
     },
   });
 
+  dc.addType("Prehead", {
+    extend: "text",
+    isComponent: (el) => el.classList?.contains("prehead"),
+    model: {
+      defaults: {
+        tagName: "span",
+        attributes: {
+          class: "prehead",
+        },
+        content: `prehead text`,
+        styles: `
+        .prehead {
+          display: block;
+          margin-bottom: 0.6em;
+          font-size: 0.36em;
+          text-transform: uppercase;
+        }
+      `,
+      },
+    },
+  });
+
   dc.addType("Modal Title", {
+    extend: "text",
     isComponent: (el) => el.classList?.contains("modal-title"),
     model: {
       defaults: {
@@ -161,9 +184,7 @@ export default function (editor) {
           class: "modal-title",
           tabindex: "-1",
         },
-        components: [
-          `<span class="prehead">Elevate Your Cocktails</span>With 10% Off`,
-        ],
+        components: [{ type: "Prehead" }, "headline text"],
         styles: `
         .primary-content {
           display: grid;
@@ -179,13 +200,6 @@ export default function (editor) {
           .primary-content {
             width: 50%;
           }
-        }
-
-        .prehead {
-          display: block;
-          margin-bottom: 0.6em;
-          font-size: 0.36em;
-          text-transform: uppercase;
         }
       `,
       },
@@ -213,11 +227,10 @@ export default function (editor) {
           class: "primary-content",
         },
         components: [
+          {
+            type: "Modal Title",
+          },
           `
-          <h2 class="modal-title" tabindex="-1">
-            <span class="prehead">Elevate Your Cocktails</span>
-            With 10% Off
-          </h2>
           <p>
             Receive 10% off your first order when you join our email list
             along with special promotions, curated playlists, and first
