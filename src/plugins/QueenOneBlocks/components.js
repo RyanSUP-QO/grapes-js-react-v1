@@ -212,12 +212,6 @@ export default function (editor) {
   // Decline Button
   dc.addType("", {});
 
-  // Split Layout -- Only dropable in Dialog frame
-  dc.addType("", {});
-
-  // Flex Image
-  dc.addType("", {});
-
   dc.addType("Primary Content", {
     isComponent: (el) => el.classList?.contains("primary-content"),
     model: {

@@ -437,6 +437,7 @@
           position: relative; /* close button should be relative to the frame */
           z-index: 2; /* make sure the content frame sits on top of the overlay. */
           display: flex;
+          flex-direction: column;
           width: 320px;
           min-height: 480px; /* min-height so that content can expand the height if necessary */
           margin: auto;
@@ -487,6 +488,24 @@
             2px 2px 6px 3px 6px 3px #ee4484;
         }
 
+        .primary-content {
+          display: grid;
+          grid-auto-rows: max-content;
+          gap: 1.3rem;
+          width: 100%;
+          margin: auto;
+          padding: 20px 40px;
+          text-align: center;
+        }
+
+        @media screen and (min-width: 800px) {
+          .primary-content {
+            width: 50%;
+          }
+        }
+
+        /* split layout start */
+
         .primary-image-column {
           background-repeat: no-repeat;
           background-size: cover;
@@ -494,40 +513,25 @@
 
         .primary-content-column {
           display: flex;
-          flex: 1; /* needed to stretch to fill the parent in case the content is narrow */
-        }
-
-        .primary-content {
-          display: grid;
-          grid-auto-rows: max-content;
-          gap: 1.3rem;
-          width: 50%;
-          margin: auto;
-          padding: 20px 40px;
-          text-align: center;
-        }
-
-        /* split layout */
-
-        .dialog-frame__layout-split-image-show-on-mobile {
-          display: grid;
-          grid-template-rows: max-content 1fr;
+          flex: 1;
         }
 
         @media screen and (min-width: 800px) {
-          .dialog-frame__layout-split-image-show-on-mobile {
-            grid-template-rows: auto;
-          }
-
           .dialog-frame__layout-split-image {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+          }
+
+          .primary-image-column {
+            flex: 1;
+          }
+
+          .dialog-frame__layout-split-image .primary-content {
+            width: 100%;
           }
         }
-
-        .dialog-frame__layout-split-image .primary-content {
-          width: 100%;
-        }
+        /* split layout end */
       </style>
       <div
         id="qom-1234"
@@ -542,13 +546,15 @@
         <!-- Step 1 -->
         <div
           id="qom-1234-step-1"
-          class="dialog-frame dialog-frame__layout-split-image dialog-frame__layout-split-image-show-on-mobile"
+          class="dialog-frame dialog-frame__layout-split-image"
           role="document"
           aria-hidden="true"
         >
           <style>
             /* @media screen and (min-width: 800px) { */
             #qom-1234-step-1 .primary-image-column {
+              width: 100%;
+              min-height: 100px;
               background-image: url("https://cdn.rejoiner.com/2a38f41cd9c145f6a23fb478ff2255c7/lib/pluginId_2a38f41cd9c145f6a23fb478ff2255c7_images/gdJoGxa/forms/bg1.png");
             }
             /* } */
