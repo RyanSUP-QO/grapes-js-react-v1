@@ -16,6 +16,8 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "grapesjs": "^0.22.6",
+    "grapesjs-blocks-basic": "^1.0.2",
+    "grapesjs-plugin-forms": "^2.0.6",
     "motion": "^12.7.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

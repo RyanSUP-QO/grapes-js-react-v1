@@ -1,6 +1,8 @@
 import grapesjs from "grapesjs";
+import gjsForms from "grapesjs-plugin-forms";
+import gjsBasicBlocks from "grapesjs-blocks-basic";
 import GjsEditor, { Canvas } from "@grapesjs/react";
-import OptInFormBuilder from "../plugins/OptInFormBuilder";
+
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
 
 export default function OptInEditor() {
@@ -18,11 +20,16 @@ export default function OptInEditor() {
         storageManager: false,
       }}
       plugins={[
-        // {
-        //   id: "gjs-blocks-basic",
-        //   src: "https://unpkg.com/grapesjs-blocks-basic",
-        // },
-        // OptInFormBuilder,
+        (editor) => {
+          gjsForms(editor, {
+            blocks: ["label"],
+          });
+        },
+        (editor) => {
+          gjsBasicBlocks(editor, {
+            blocks: ["text", "link", "image"],
+          });
+        },
         QueenOneBlocks,
       ]}
       waitReady

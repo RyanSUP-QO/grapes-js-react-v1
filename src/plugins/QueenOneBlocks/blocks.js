@@ -1,46 +1,81 @@
 export default function (editor) {
-  editor.Blocks.add("Container", {
-    label: "Container",
-    content: [{ type: "Container" }],
+  editor.Blocks.add("qo-button", {
+    label: "👸🥇 Submit Button",
+    category: "Queen One",
+    content: { type: "button", classes: ["form-wrapper-submit", "button"] },
   });
 
-  editor.Blocks.add("Overlay", {
-    label: "Overlay",
-    content: [{ type: "Overlay" }],
+  editor.Blocks.add("qo-input", {
+    label: "👸🥇 Input",
+    category: "Queen One",
+    content: { type: "input", classes: ["form-wrapper-input", "input"] },
   });
 
-  editor.Blocks.add("Dialog Frame", {
-    label: "Dialog Frame",
-    content: [{ type: "Dialog Frame" }],
-  });
-
-  editor.Blocks.add("Floating Close Button", {
-    label: "Floating Close Button",
-    content: [{ type: "Floating Close Button" }],
-  });
-
-  editor.Blocks.add("Div", {
-    label: "Div",
-    content: `<div></div>`,
-  });
-
-  editor.Blocks.add("Text", {
-    label: "Text",
-    content: `<p>Share your thoughts</p>`,
+  editor.Blocks.add("qo-box", {
+    label: "👸🥇 Box",
+    category: "Queen One",
+    content: { type: "qo-box" },
   });
 
   editor.Blocks.add("Primary Content", {
-    label: "Primary Content Form",
-    content: [{ type: "Primary Content" }],
+    label: "👸🥇 Primary Content Container",
+    category: "Queen One",
+    content: {
+      type: "Primary Content",
+      components: [
+        {
+          type: "text",
+          tagName: "h2",
+          components: [
+            { type: "Prehead", components: "Elevate Your Cocktails" },
+            "With 10% Off",
+          ],
+        },
+        {
+          type: "text",
+          content: `                Receive 10% off your first order when you join our email list
+                along with special promotions, curated playlists, and first
+                access to new products and limited runs.`,
+        },
+        { type: "label", classes: ["visuallyhidden"] },
+        { type: "input", classes: ["form-wrapper-input", "input"] },
+        {
+          type: "button",
+          classes: ["form-wrapper-submit", "button"],
+          text: "To The Bitters",
+        },
+        {
+          type: "button",
+          classes: ["unstyled-button"],
+          attributes: { "data-a11y-dialog-hide": "" }, // ? Is it ok to set to empty string?
+          text: "No thanks, I’m not into saving money.",
+        },
+      ],
+    },
   });
 
-  editor.Blocks.add("Prehead", {
-    label: "Prehead",
-    content: [{ type: "Prehead" }],
+  editor.Blocks.add("qo-title", {
+    label: "👸🥇 Title",
+    category: "Queen One",
+    content: {
+      type: "text",
+      content: "Title",
+      tagName: "h2",
+    },
   });
 
-  editor.Blocks.add("Modal Title", {
-    label: "Modal Title with prehead",
-    content: [{ type: "Modal Title" }],
+  editor.Blocks.add("qo-prehead-title", {
+    label: "👸🥇 Title with prehead",
+    category: "Queen One",
+    content: {
+      type: "Modal Title",
+      components: [{ type: "Prehead", components: "prehead" }, "headline"],
+    },
+  });
+
+  editor.Blocks.add("text", {
+    label: "👸🥇 Text",
+    category: "Queen One",
+    content: `<p>Lorem ipsum</p>`,
   });
 }
