@@ -1,8 +1,25 @@
 export default function (editor) {
-  editor.Blocks.add("qo-button", {
+  editor.Blocks.add("qo-button-submit", {
     label: "👸🥇 Submit Button",
     category: "Queen One",
-    content: { type: "button", classes: ["form-wrapper-submit", "button"] },
+    content: {
+      type: "button",
+      classes: ["form-wrapper-submit", "button"],
+      text: "Submit",
+    },
+  });
+
+  editor.Blocks.add("qo-button-cancel", {
+    label: "👸🥇 Cancel Button",
+    category: "Queen One",
+    content: {
+      type: "button",
+      classes: ["unstyled-button"],
+      attributes: {
+        "data-a11y-dialog-hide": "",
+      },
+      text: "No thanks",
+    },
   });
 
   editor.Blocks.add("qo-input", {
@@ -18,7 +35,7 @@ export default function (editor) {
   });
 
   editor.Blocks.add("Primary Content", {
-    label: "👸🥇 Primary Content Container",
+    label: "👸🥇 Form with starter content",
     category: "Queen One",
     content: {
       type: "Primary Content",
@@ -54,6 +71,20 @@ export default function (editor) {
     },
   });
 
+  editor.Blocks.add("Test", {
+    label: "👸🥇 Form box",
+    category: "Queen One",
+    content: {
+      type: "Primary Content",
+    },
+  });
+
+  editor.Blocks.add("Primary Content", {
+    label: "👸🥇 Form box",
+    category: "Queen One",
+    type: "Primary Content",
+  });
+
   editor.Blocks.add("qo-title", {
     label: "👸🥇 Title",
     category: "Queen One",
@@ -71,11 +102,5 @@ export default function (editor) {
       type: "Modal Title",
       components: [{ type: "Prehead", components: "prehead" }, "headline"],
     },
-  });
-
-  editor.Blocks.add("text", {
-    label: "👸🥇 Text",
-    category: "Queen One",
-    content: `<p>Lorem ipsum</p>`,
   });
 }

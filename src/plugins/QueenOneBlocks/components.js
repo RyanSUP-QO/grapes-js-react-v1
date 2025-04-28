@@ -1,5 +1,3 @@
-export const typeQOButton = "qo-button";
-
 export default function (editor) {
   const dc = editor.DomComponents;
 
