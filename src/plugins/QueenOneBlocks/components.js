@@ -98,7 +98,7 @@ export default function (editor) {
           type: "button",
           class: "floating-close-button",
           "aria-label": "Close dialog",
-          "data-a11y-dialog-hide": "Your dialog ID", // ? Need some clarifications here. WHat should the value be? https://a11y-dialog.netlify.app/usage/interactions/
+          "data-a11y-dialog-hide": "",
         },
         styles: `
           .floating-close-button {
@@ -175,10 +175,26 @@ export default function (editor) {
         attributes: {
           class: "primary-content",
         },
+        styles: `
+.primary-content {
+  display: grid;
+  grid-auto-rows: max-content;
+  gap: 1.3rem;
+  width: 100%;
+  margin: auto;
+  padding: 20px 40px;
+  text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+  .primary-content {
+    width: 50%;
+  }
+}`,
         components: [
           `
 <h2 class="modal-title" tabindex="-1">
-  <span class="prehead">Elevate Your Cocktails</span>
+  <span class="prehead">Elevate Your Home</span>
   With 10% Off
 </h2>
 <p>
@@ -200,9 +216,8 @@ export default function (editor) {
 <button
   type="button"
   class="form-wrapper-submit button"
-  onclick="nextStep('qom-1234')"
 >
-  To The Bitters
+  Next
 </button>
 <button
   class="unstyled-button"

@@ -1,6 +1,6 @@
 import defineCustomComponentTypes from "./components";
 import addBlocks from "./blocks";
-import components from "./components";
+import templates from "./templates";
 
 const queenOneResetStyles = `
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -100,104 +100,6 @@ table {
   inset: 0;
 }
 
-/* Queen One Modal Styles */
-
-.container {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  z-index: 2;
-  padding: 6px;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
-}
-
-@media screen and (min-width: 800px) {
-  .container {
-    padding: 0;
-  }
-}
-
-.container[aria-hidden="true"] {
-  display: none;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.dialog-frame {
-  position: relative; /* close button should be relative to the frame */
-  z-index: 2; /* make sure the content frame sits on top of the overlay. */
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-  min-height: 480px; /* min-height so that content can expand the height if necessary */
-  margin: auto;
-  background-color: #ffffff; /* default bg color */
-}
-
-@media screen and (min-width: 800px) {
-  .dialog-frame {
-    width: 800px;
-    min-height: 600px;
-  }
-}
-
-.dialog-frame[aria-hidden="true"] {
-  display: none;
-}
-
-.floating-close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border-radius: 20px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.7);
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: #000000;
-}
-
-.floating-close-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #ffffff;
-}
-
-.floating-close-button:focus {
-  outline: none;
-  background-color: #000000;
-  color: #ffffff;
-  animation: hover-shadow 4s linear infinite;
-  box-shadow: 0 0 0 2px #ffffff, -2px -2px 6px 3px 6px 3px #7a36fd,
-    2px 2px 6px 3px 6px 3px #ee4484;
-}
-
-.primary-content {
-  display: grid;
-  grid-auto-rows: max-content;
-  gap: 1.3rem;
-  width: 100%;
-  margin: auto;
-  padding: 20px 40px;
-  text-align: center;
-}
-
-@media screen and (min-width: 800px) {
-  .primary-content {
-    width: 50%;
-  }
-}
-
 /* Queen One Modal Default Theme */
 
 @keyframes hover-shadow {
@@ -289,20 +191,21 @@ p {
 }
 `;
 
-export default function (editor) {
+export default function (editor, opts = {}) {
+  console.log("Initializing QueenOneBlocks plugin", opts);
   editor.on("load", () => {
-    // ! Must reset styles before adding components or the component-defined styles will be overwritten!
-    editor.setStyle(queenOneResetStyles);
-    editor.addComponents({
-      type: "Container",
-      components: [
-        { type: "Overlay" },
-        {
-          type: "Dialog Frame",
-          components: [{ type: "Floating Close Button" }],
-        },
-      ],
-    });
+    // Ensure styles are applied after the editor is fully loaded
+    console.log("Editor loaded in plugin", opts);
+    editor.addStyle(queenOneResetStyles);
+  });
+
+  editor.on("storage:load", (data) => {
+    // Add default components if no data is loaded
+    
+    if (Object.keys(data).length === 0) {
+      const template = templates[opts.template] || templates["single-column"];
+      editor.setComponents(template);
+    }
   });
 
   defineCustomComponentTypes(editor);

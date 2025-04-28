@@ -24,12 +24,12 @@ export default function TriggerDashboard() {
         <motion.div whileHover={{ scale: 1.02 }}>
           <TriggerCard title="New user enters site" />
         </motion.div>
-        <motion.div whileHover={{ scale: 1.02 }}>
+        {/* <motion.div whileHover={{ scale: 1.02 }}>
           <TriggerCard title="Customer birthday month" />
         </motion.div>
         <motion.div whileHover={{ scale: 1.02 }}>
           <TriggerCard title="Embedded email capture" />
-        </motion.div>
+        </motion.div> */}
       </Box>
     </Box>
   );

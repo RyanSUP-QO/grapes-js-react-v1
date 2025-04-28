@@ -19,13 +19,14 @@ export default function TemplateCardB() {
         >
           <Grid
             size={12}
-            sx={{ border: "1px solid", height: 200, borderRadius: 1 }}
-          />
+            sx={{ border: "1px solid", height: 200, borderRadius: 1, display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            Content
+          </Grid>
         </Grid>
         <br />
         <Typography textTransform="none" gutterBottom fontSize={14}>
-          Build what you want but Queen One isn't responsible if it isn't
-          performant / responsive
+          Standard single column layout
         </Typography>
       </CardContent>
     </Card>

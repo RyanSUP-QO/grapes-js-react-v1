@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import TemplateCard from "./TemplateCard";
 import { motion, AnimatePresence } from "motion/react";
 import TemplateCardB from "./TemplateCardB";
@@ -28,37 +28,31 @@ export default function TemplateGrid() {
     <motion.ul style={{ display: "flex" }}>
       <AnimatePresence>
         <motion.li
-          key={"QUEEN ONE GOLDEN STANDARD"}
+          key={"single-column"}
           variants={templateVariants}
           exit={{ opacity: 0, scale: 0.9 }}
           whileHover={{ scale: 1.02 }}
         >
-          <Typography variant="h5" fontWeight="bold" textAlign="center">
-            {"QUEEN ONE GOLDEN STANDARD"}
-          </Typography>
           <Button
             sx={{ width: "100%" }}
-            onClick={() =>
-              navigate("/build?template=QUEEN_ONE_GOLDEN_STANDARD")
-            }
+            onClick={() => navigate("/build/a?template=single-column")}
           >
-            <TemplateCard />
+            <TemplateCardB />
           </Button>
         </motion.li>
         <motion.li
-          key={"BREAK THE GLASS"}
+          key={"two-column"}
           variants={templateVariants}
           exit={{ opacity: 0, scale: 0.9 }}
           whileHover={{ scale: 1.02 }}
         >
-          <Typography variant="h5" fontWeight="bold" textAlign="center">
-            {"BREAK THE GLASS"}
-          </Typography>
           <Button
             sx={{ width: "100%" }}
-            onClick={() => navigate("/build?template=QUEEN_ONE_HERO")}
+            onClick={() =>
+            navigate("/build/a?template=two-column")
+            }
           >
-            <TemplateCardB />
+            <TemplateCard />
           </Button>
         </motion.li>
       </AnimatePresence>

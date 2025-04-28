@@ -11,6 +11,8 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
@@ -60,6 +62,13 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 export default function TriggerCard({ title }) {
   const navigate = useNavigate();
+  const [isQoAEnabled, setIsQoAEnabled] = useState(false);
+
+  useEffect(() => {
+    const qoAValue = localStorage.getItem("qo-a");
+    setIsQoAEnabled(qoAValue !== null && Object.keys(qoAValue)?.length !== 0);
+  }, []);
+
   return (
     <Card sx={{ width: 350 }}>
       <CardContent>
@@ -73,21 +82,24 @@ export default function TriggerCard({ title }) {
         </Stack>
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Button
-          onClick={() => navigate("/build")}
-          variant="contained"
-          startIcon={<EditIcon />}
-          sx={{ flexGrow: 1 }}
-        >
-          A
-        </Button>
-        <Button
-          onClick={() => navigate("/templates")}
-          variant="outlined"
-          sx={{ borderStyle: "dashed", flexGrow: 1 }}
-        >
-          + B
-        </Button>
+        {isQoAEnabled ? (
+          <Button
+            onClick={() => navigate("/build/a")}
+            variant="contained"
+            startIcon={<EditIcon />}
+            sx={{ flexGrow: 1 }}
+          >
+            Edit
+          </Button>
+        ) : (
+          <Button
+            onClick={() => navigate("/templates")}
+            variant="outlined"
+            sx={{ borderStyle: "dashed", flexGrow: 1 }}
+          >
+            New frame from template
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

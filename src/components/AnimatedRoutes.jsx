@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router";
+import { Route, Routes, useLocation, useParams } from "react-router";
 import OptInEditor from "./OptInEditor";
 import TriggerDashboard from "../pages/TriggerDashboard";
 import { motion } from "motion/react";
@@ -18,6 +18,16 @@ function FadeInAnimationWrapper({ children }) {
     >
       {children}
     </motion.div>
+  );
+}
+
+function BuildRouteWrapper() {
+  const { id } = useParams();
+  return (
+    <>
+      <CurtainAnimation />
+      <OptInEditor id={id} />
+    </>
   );
 }
 
@@ -43,13 +53,8 @@ export default function AnimatedRoutes() {
           }
         />
         <Route
-          path="/build"
-          element={
-            <>
-              <CurtainAnimation />
-              <OptInEditor />
-            </>
-          }
+          path="/build/:id"
+          element={<BuildRouteWrapper />}
         />
       </Routes>
     </AnimatePresence>
