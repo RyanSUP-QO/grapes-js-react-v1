@@ -183,12 +183,6 @@ p {
   text-align: left;
 }
 
-.prehead {
-  display: block;
-  margin-bottom: 0.6em;
-  font-size: 0.36em;
-  text-transform: uppercase;
-}
 `;
 
 export default function (editor, opts = {}) {
@@ -201,7 +195,7 @@ export default function (editor, opts = {}) {
 
   editor.on("storage:load", (data) => {
     // Add default components if no data is loaded
-    
+
     if (Object.keys(data).length === 0) {
       const template = templates[opts.template] || templates["single-column"];
       editor.setComponents(template);

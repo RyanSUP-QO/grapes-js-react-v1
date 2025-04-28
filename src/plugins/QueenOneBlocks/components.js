@@ -90,6 +90,7 @@ export default function (editor) {
   });
 
   dc.addType("Floating Close Button", {
+    extend: "button",
     isComponent: (el) => el.classList?.contains("floating-close-button"),
     model: {
       defaults: {
@@ -134,7 +135,7 @@ export default function (editor) {
               2px 2px 6px 3px 6px 3px #ee4484;
           }
         `,
-        components: `
+        text: `
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -152,22 +153,43 @@ export default function (editor) {
     },
   });
 
-  // Submit button
-  dc.addType("", {});
+  dc.addType("Prehead", {
+    extend: "text",
+    isComponent: (el) => el.classList?.contains("prehead"),
+    model: {
+      defaults: {
+        tagName: "span",
+        attributes: {
+          class: "prehead",
+        },
+        styles: `
+        .prehead {
+          display: block;
+          margin-bottom: 0.6em;
+          font-size: 0.36em;
+          text-transform: uppercase;
+        }
+      `,
+      },
+    },
+  });
 
-  // Decline Button
-  dc.addType("", {});
-
-  // Split Layout -- Only dropable in Dialog frame
-  dc.addType("", {});
-
-  // Flex Image
-  dc.addType("", {});
-
-  // Form (Primary Content)
-  dc.addType("", {});
+  dc.addType("Modal Title", {
+    extend: "text",
+    isComponent: (el) => el.classList?.contains("modal-title"),
+    model: {
+      defaults: {
+        tagName: "h2",
+        attributes: {
+          class: "modal-title",
+          tabindex: "-1",
+        },
+      },
+    },
+  });
 
   dc.addType("Primary Content", {
+    extend: "form",
     isComponent: (el) => el.classList?.contains("primary-content"),
     model: {
       defaults: {
@@ -176,57 +198,22 @@ export default function (editor) {
           class: "primary-content",
         },
         styles: `
-.primary-content {
-  display: grid;
-  grid-auto-rows: max-content;
-  gap: 1.3rem;
-  width: 100%;
-  margin: auto;
-  padding: 20px 40px;
-  text-align: center;
-}
+        .primary-content {
+          display: grid;
+          grid-auto-rows: max-content;
+          gap: 1.3rem;
+          width: 100%;
+          margin: auto;
+          padding: 20px 40px;
+          text-align: center;
+        }
 
-@media screen and (min-width: 800px) {
-  .primary-content {
-    width: 50%;
-  }
-}`,
-        components: [
-          `
-<h2 class="modal-title" tabindex="-1">
-  <span class="prehead">Elevate Your Home</span>
-  With 10% Off
-</h2>
-<p>
-  Receive 10% off your first order when you join our email list
-  along with special promotions, curated playlists, and first
-  access to new products and limited runs.
-</p>
-<label for="qom-1234-step-1-email" class="visuallyhidden">
-  Email (required)
-</label>
-<input
-  id="qom-1234-step-1-email"
-  name="email"
-  class="form-wrapper-input input"
-  type="email"
-  placeholder="Enter Email"
-  required
-/>
-<button
-  type="button"
-  class="form-wrapper-submit button"
->
-  Next
-</button>
-<button
-  class="unstyled-button"
-  type="button"
-  data-a11y-dialog-hide
->
-  No thanks, I’m not into saving money.
-</button>`,
-        ],
+        @media screen and (min-width: 800px) {
+          .primary-content {
+            width: 50%;
+          }
+        }
+      `,
       },
     },
   });
