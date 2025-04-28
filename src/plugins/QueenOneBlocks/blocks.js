@@ -1,4 +1,5 @@
 export default function (editor) {
+  // Should this be a component def? Because it is very specific to certain classes, ids, and attributes
   editor.Blocks.add("qo-button-submit", {
     label: "👸🥇 Submit Button",
     category: "Queen One",
@@ -9,6 +10,7 @@ export default function (editor) {
     },
   });
 
+  // Should this be a component def? Because it is very specific to certain classes, ids, and attributes
   editor.Blocks.add("qo-button-cancel", {
     label: "👸🥇 Cancel Button",
     category: "Queen One",
@@ -22,6 +24,7 @@ export default function (editor) {
     },
   });
 
+  // Should this be a component def? Because it is very specific to certain classes, ids, and attributes
   editor.Blocks.add("qo-input", {
     label: "👸🥇 Input",
     category: "Queen One",
@@ -71,27 +74,18 @@ export default function (editor) {
     },
   });
 
-  editor.Blocks.add("Test", {
-    label: "👸🥇 Form box",
-    category: "Queen One",
-    content: {
-      type: "Primary Content",
-    },
-  });
-
   editor.Blocks.add("Primary Content", {
     label: "👸🥇 Form box",
     category: "Queen One",
     type: "Primary Content",
   });
 
-  editor.Blocks.add("qo-title", {
+  editor.Blocks.add("Modal Title", {
     label: "👸🥇 Title",
     category: "Queen One",
     content: {
-      type: "text",
+      type: "Modal Title",
       content: "Title",
-      tagName: "h2",
     },
   });
 

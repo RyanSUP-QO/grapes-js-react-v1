@@ -18,14 +18,7 @@ export default function (editor) {
             inset: 0;
             display: flex;
             z-index: 2;
-            padding: 6px;
             font-family: "Roboto", Helvetica, Arial, sans-serif;
-          }
-
-          @media screen and (min-width: 800px) {
-            .container {
-              padding: 0;
-            }
           }
 
           .container[aria-hidden="true"] {
@@ -184,6 +177,13 @@ export default function (editor) {
           class: "modal-title",
           tabindex: "-1",
         },
+        styles: `
+          @media (max-width: 480px) {
+            .modal-title {
+              font-size: 16px
+          }
+      }
+        `,
       },
     },
   });
