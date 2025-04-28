@@ -64,7 +64,7 @@ export default function (editor) {
         {
           type: "button",
           classes: ["unstyled-button"],
-          attributes: { "data-a11y-dialog-hide": "" }, // ? Is it ok to set to empty string?
+          attributes: { "data-a11y-dialog-hide": "" },
           text: "No thanks, I’m not into saving money.",
         },
       ],
