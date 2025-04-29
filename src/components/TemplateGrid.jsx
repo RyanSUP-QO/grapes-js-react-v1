@@ -18,7 +18,7 @@ const templateVariants = {
 };
 
 export default function TemplateGrid() {
-  // In the future we will get templates from some data steam
+  // * We will do this with tanstack-query for the real-deal
   const [templates, setTemplates] = useState([]);
   useEffect(() => {
     const fetchTemplates = async () => {
@@ -30,6 +30,7 @@ export default function TemplateGrid() {
 
   const navigate = useNavigate();
 
+  // TODO Show cards again instead of simple buttons.
   return (
     <motion.ul style={{ display: "flex" }}>
       <AnimatePresence>

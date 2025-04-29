@@ -18,9 +18,11 @@ export default function OptInEditor() {
       }}
       options={{
         height: "100vh",
-        // ? How can I keep this AND local storage? https://grapesjs.com/docs/modules/Storage.html#extend-storage
+        // TODO Reimplement local storage saving?
+        // ? How can I keep supabase storage AND local storage? https://grapesjs.com/docs/modules/Storage.html#extend-storage
         storageManager: {
           type: "supabase",
+          autosave: false,
         },
         // This setting makes style changes specific to instances of components using an id selector.
         // selectorManager: {
@@ -43,6 +45,7 @@ export default function OptInEditor() {
             blocks: ["text", "link", "image"],
           });
         },
+        // TODO Re-integrate queen one blocks (remove storage code)
         // QueenOneBlocks,
         QueenOneTemplates,
       ]}

@@ -64,6 +64,7 @@ export default function TriggerCard({ title }) {
   const navigate = useNavigate();
   const [isQoAEnabled, setIsQoAEnabled] = useState(false);
 
+  // TODO Link trigger cards to supabase data. Will need triggers table?
   useEffect(() => {
     const qoAValue = localStorage.getItem("qo-a");
     setIsQoAEnabled(qoAValue !== null && Object.keys(qoAValue)?.length !== 0);
