@@ -52,10 +52,8 @@ export default function AnimatedRoutes() {
             </FadeInAnimationWrapper>
           }
         />
-        <Route
-          path="/build/:id"
-          element={<BuildRouteWrapper />}
-        />
+        <Route path="/build/:id" element={<BuildRouteWrapper />} />
+        <Route path="/build" element={<BuildRouteWrapper />} />
       </Routes>
     </AnimatePresence>
   );

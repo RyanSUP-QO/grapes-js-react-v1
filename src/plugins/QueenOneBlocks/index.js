@@ -1,6 +1,5 @@
 import defineCustomComponentTypes from "./components";
 import addBlocks from "./blocks";
-import templates from "./templates";
 
 const queenOneResetStyles = `
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -185,21 +184,11 @@ p {
 
 `;
 
-export default function (editor, opts = {}) {
-  console.log("Initializing QueenOneBlocks plugin", opts);
+export default function (editor) {
+  console.log("Initializing QueenOneBlocks plugin");
   editor.on("load", () => {
-    // Ensure styles are applied after the editor is fully loaded
-    console.log("Editor loaded in plugin", opts);
+    console.log("Adding Queen One Reset Styles");
     editor.addStyle(queenOneResetStyles);
-  });
-
-  editor.on("storage:load", (data) => {
-    // Add default components if no data is loaded
-
-    if (Object.keys(data).length === 0) {
-      const template = templates[opts.template] || templates["single-column"];
-      editor.setComponents(template);
-    }
   });
 
   defineCustomComponentTypes(editor);

@@ -5,10 +5,10 @@ import GjsEditor, { Canvas } from "@grapesjs/react";
 
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
 import QueenOneTemplates from "../plugins/QueenOneTemplates";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 export default function OptInEditor() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   return (
     <GjsEditor
       grapesjs={grapesjs}
@@ -20,6 +20,7 @@ export default function OptInEditor() {
         height: "100vh",
         // TODO Reimplement local storage saving?
         // ? How can I keep supabase storage AND local storage? https://grapesjs.com/docs/modules/Storage.html#extend-storage
+        // Strategy will be to implement a local-supabase mixed storage manager.
         storageManager: {
           type: "supabase",
           autosave: false,
@@ -31,6 +32,7 @@ export default function OptInEditor() {
         pluginsOpts: {
           [QueenOneTemplates]: {
             id,
+            handleSavingNewTemplate: (id) => navigate(`/build/${id}`),
           },
         },
       }}
@@ -45,9 +47,8 @@ export default function OptInEditor() {
             blocks: ["text", "link", "image"],
           });
         },
-        // TODO Re-integrate queen one blocks (remove storage code)
-        // QueenOneBlocks,
         QueenOneTemplates,
+        QueenOneBlocks,
       ]}
       waitReady
     />

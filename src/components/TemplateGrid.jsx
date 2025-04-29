@@ -50,6 +50,20 @@ export default function TemplateGrid() {
             </Button>
           </motion.li>
         ))}
+        <motion.li
+          key="new"
+          variants={templateVariants}
+          exit={{ opacity: 0, scale: 0.9 }}
+          whileHover={{ scale: 1.02 }}
+        >
+          <Button
+            sx={{ width: "100%" }}
+            onClick={() => navigate(`/build`)}
+            variant="contained"
+          >
+            Blank canvas
+          </Button>
+        </motion.li>
       </AnimatePresence>
     </motion.ul>
   );

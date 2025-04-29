@@ -46,6 +46,17 @@ const singleLayout = {
   ],
 };
 
+const blank = {
+  type: "Container",
+  components: [
+    { type: "Overlay" },
+    {
+      type: "Dialog Frame",
+      components: [{ type: "Floating Close Button" }],
+    },
+  ],
+};
+
 const twoColumnLayout = {
   type: "Container",
   components: [
@@ -64,4 +75,5 @@ const twoColumnLayout = {
 export default {
   "single-column": singleLayout,
   "two-column": twoColumnLayout,
+  blank,
 };
