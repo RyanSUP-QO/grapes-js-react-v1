@@ -1,9 +1,6 @@
 import { Route, Routes, useLocation, useParams } from "react-router";
 import OptInEditor from "./OptInEditor";
-import TriggerDashboard from "../pages/TriggerDashboard";
 import { motion } from "motion/react";
-
-import TemplateSelect from "../pages/TemplateSelect";
 import { AnimatePresence } from "motion/react";
 import CurtainAnimation from "./CurtainAnimation";
 import Templates from "../pages/Templates";
