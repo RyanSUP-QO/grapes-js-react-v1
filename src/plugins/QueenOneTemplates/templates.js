@@ -47,12 +47,16 @@ const singleLayout = {
 };
 
 const blank = {
-  type: "Container",
   components: [
-    { type: "Overlay" },
     {
-      type: "Dialog Frame",
-      components: [{ type: "Floating Close Button" }],
+      type: "Container",
+      components: [
+        { type: "Overlay" },
+        {
+          type: "Dialog Frame",
+          components: [{ type: "Floating Close Button" }],
+        },
+      ],
     },
   ],
 };
