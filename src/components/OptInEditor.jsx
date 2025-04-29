@@ -4,12 +4,10 @@ import gjsBasicBlocks from "grapesjs-blocks-basic";
 import GjsEditor, { Canvas } from "@grapesjs/react";
 
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
-import { useSearchParams } from "react-router";
-
-export default function OptInEditor({ id }) {
-  const [searchParams] = useSearchParams();
-  const template = searchParams.get("template");
-  const localStorageKey = `qo-${id}`;
+import QueenOneTemplates from "../plugins/QueenOneTemplates";
+import { useParams } from "react-router";
+export default function OptInEditor() {
+  const { id } = useParams();
 
   return (
     <GjsEditor
@@ -20,24 +18,17 @@ export default function OptInEditor({ id }) {
       }}
       options={{
         height: "100vh",
+        // ? How can I keep this AND local storage? https://grapesjs.com/docs/modules/Storage.html#extend-storage
         storageManager: {
-          type: "local",
-          autosave: true,
-          autoload: true,
-          stepsBeforeSave: 1,
-          options: {
-            local: {
-              key: localStorageKey,
-            },
-          },
+          type: "supabase",
         },
         // This setting makes style changes specific to instances of components using an id selector.
         // selectorManager: {
         //   componentFirst: true,
         // },
         pluginsOpts: {
-          [QueenOneBlocks]: {
-            template,
+          [QueenOneTemplates]: {
+            id,
           },
         },
       }}
@@ -52,7 +43,8 @@ export default function OptInEditor({ id }) {
             blocks: ["text", "link", "image"],
           });
         },
-        QueenOneBlocks,
+        // QueenOneBlocks,
+        QueenOneTemplates,
       ]}
       waitReady
     />
