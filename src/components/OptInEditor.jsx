@@ -5,9 +5,8 @@ import GjsEditor, { Canvas } from "@grapesjs/react";
 
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
 import QueenOneTemplates from "../plugins/QueenOneTemplates";
-import { useNavigate, useParams } from "react-router";
-export default function OptInEditor() {
-  const { id } = useParams();
+import { useNavigate } from "react-router";
+export default function OptInEditor({ id }) {
   const navigate = useNavigate();
   return (
     <GjsEditor
@@ -32,7 +31,7 @@ export default function OptInEditor() {
         pluginsOpts: {
           [QueenOneTemplates]: {
             id,
-            handleSavingNewTemplate: (id) => navigate(`/build/${id}`),
+            // handleSavingNewTemplate: (id) => navigate(`/build/${id}`),
           },
         },
       }}

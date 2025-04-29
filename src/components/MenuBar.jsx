@@ -1,11 +1,17 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router";
 export default function MenuBar() {
+  const navigate = useNavigate();
   return (
     <AppBar position="static" style={{ zIndex: 3, opacity: 0.9 }}>
       <Toolbar variant="dense">
-        <Typography variant="h6" color="inherit" component="div">
-          QUEEN ONE :: DIALOG BUILDER DEMO
-        </Typography>
+        {/* These should probably be links in final product */}
+        <Button onClick={() => navigate("/optins")} color="inherit">
+          Optins
+        </Button>
+        <Button onClick={() => navigate("/")} color="inherit">
+          Templates
+        </Button>
       </Toolbar>
     </AppBar>
   );

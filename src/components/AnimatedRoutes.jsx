@@ -6,6 +6,8 @@ import { motion } from "motion/react";
 import TemplateSelect from "../pages/TemplateSelect";
 import { AnimatePresence } from "motion/react";
 import CurtainAnimation from "./CurtainAnimation";
+import Templates from "../pages/Templates";
+import Optins from "../pages/Optins";
 
 function FadeInAnimationWrapper({ children }) {
   return (
@@ -40,15 +42,15 @@ export default function AnimatedRoutes() {
           path="/"
           element={
             <FadeInAnimationWrapper>
-              <TriggerDashboard />
+              <Templates />
             </FadeInAnimationWrapper>
           }
         />
         <Route
-          path="/templates"
+          path="/optins"
           element={
             <FadeInAnimationWrapper>
-              <TemplateSelect />
+              <Optins />
             </FadeInAnimationWrapper>
           }
         />
