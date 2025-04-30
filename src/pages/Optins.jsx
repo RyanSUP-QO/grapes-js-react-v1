@@ -1,28 +1,31 @@
-import SupabaseTemplateList from "../components/SupabaseTemplateList";
-import supabase from "../utils/supabase";
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import { useNavigate } from "react-router";
-import { Button, Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import { AnimatePresence, motion } from "motion/react";
 import SelectTemplateDialog from "../components/SelectTemplateDialog";
+import { useTemplates } from "../hooks/useTemplates";
+import SupabaseTemplateCard from "../components/SupabaseTemplateCard";
+import supabase from "../utils/supabase";
+
+const templateVariants = {
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      type: "spring",
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  hover: {
+    scale: 1.02,
+  },
+};
 
 export default function Optins() {
-  // * We will do this with tanstack-query for the real-deal
-  const [creatives, setCreatives] = useState([]);
-
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      // We'll just pull meta data required for the preview card since template json, css and html can get large.
-      let { data, error } = await supabase
-        .from("templates")
-        .select("id, name")
-        .eq("is_template", false);
-
-      setCreatives(data || []);
-    };
-    fetchTemplates();
-  }, []);
-
+  const creatives = useTemplates(false);
   const navigate = useNavigate();
 
   const handleSelectTemplate = async (id) => {
@@ -40,6 +43,7 @@ export default function Optins() {
 
     navigate(`/build/${newTemplate.id}`);
   };
+
   return (
     <Box
       sx={{
@@ -60,11 +64,42 @@ export default function Optins() {
         >
           <SelectTemplateDialog handleSelectTemplate={handleSelectTemplate} />
         </motion.div>
-        <Box flexGrow={1} width={"100%"} key="box">
-          <SupabaseTemplateList
-            templates={creatives}
-            onTemplateClick={(id) => navigate(`/build/${id}`)}
-          />
+        <Box 
+          flexGrow={1} 
+          width={"100%"} 
+          key="box"
+          component={motion.ul}
+          sx={{
+            display: "flex",
+            height: "100%",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          <AnimatePresence>
+            {creatives.map(({ id, name }) => (
+              <motion.li
+                key={id}
+                variants={templateVariants}
+                initial="show"
+                exit="exit"
+                whileHover="hover"
+              >
+                <SupabaseTemplateCard name={name}>
+                  <Button
+                    onClick={() => navigate(`/build/${id}`)}
+                    variant="outlined"
+                    sx={{ borderStyle: "dashed", flexGrow: 1 }}
+                  >
+                    Edit
+                  </Button>
+                </SupabaseTemplateCard>
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </Box>
       </AnimatePresence>
     </Box>

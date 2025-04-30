@@ -1,30 +1,36 @@
-import SupabaseTemplateList from "../components/SupabaseTemplateList";
-import supabase from "../utils/supabase";
-import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
 import { useNavigate } from "react-router";
 import { Button, Box, Typography } from "@mui/material";
+import { AnimatePresence, motion } from "motion/react";
+import { useTemplates } from "../hooks/useTemplates";
+import SupabaseTemplateCard from "../components/SupabaseTemplateCard";
+import NameInputDialog from "../components/NameInputDialog";
+import supabase from "../utils/supabase";
+
+const templateVariants = {
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      type: "spring",
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  hover: {
+    scale: 1.02,
+  },
+};
 
 export default function Templates() {
-  // * We will do this with tanstack-query for the real-deal
-  const [templates, setTemplates] = useState([]);
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      // We'll just pull meta data required for the preview card since template json, css and html can get large.
-      let { data, error } = await supabase
-        .from("templates")
-        .select("id, name")
-        .eq("is_template", true) // where is_template = true
-        .neq("id", 6);
-
-      setTemplates(data || []);
-    };
-    fetchTemplates();
-  }, []);
-
+  const templates = useTemplates(true);
   const navigate = useNavigate();
+  const [nameDialogOpen, setNameDialogOpen] = React.useState(false);
 
-  const handleNewTemplate = async () => {
+  const handleNewTemplate = async (name) => {
     const { data: blankTemplate } = await supabase
       .from("templates")
       .select("data,html,css")
@@ -33,7 +39,11 @@ export default function Templates() {
 
     const { data: newTemplate } = await supabase
       .from("templates")
-      .insert([{ is_template: true, ...blankTemplate }])
+      .insert([{ 
+        is_template: true, 
+        name,
+        ...blankTemplate 
+      }])
       .select("id")
       .single();
 
@@ -59,7 +69,7 @@ export default function Templates() {
           exit={{ opacity: 0, scale: 0.9 }}
         >
           <Button
-            onClick={handleNewTemplate}
+            onClick={() => setNameDialogOpen(true)}
             variant="contained"
             sx={{ flexGrow: 1 }}
             size="large"
@@ -67,13 +77,52 @@ export default function Templates() {
             New Template
           </Button>
         </motion.div>
-        <Box flexGrow={1} width={"100%"} key="box">
-          <SupabaseTemplateList
-            templates={templates}
-            onTemplateClick={(id) => navigate(`/build/${id}`)}
-          />
+        <Box 
+          flexGrow={1} 
+          width={"100%"} 
+          key="box"
+          component={motion.ul}
+          sx={{
+            display: "flex",
+            height: "100%",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+          }}
+        >
+          <AnimatePresence>
+            {templates.map(({ id, name }) => (
+              <motion.li
+                key={id}
+                variants={templateVariants}
+                initial="show"
+                exit="exit"
+                whileHover="hover"
+              >
+                <SupabaseTemplateCard name={name}>
+                  <Button
+                    onClick={() => navigate(`/build/${id}`)}
+                    variant="outlined"
+                    sx={{ borderStyle: "dashed", flexGrow: 1 }}
+                  >
+                    Edit
+                  </Button>
+                </SupabaseTemplateCard>
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </Box>
       </AnimatePresence>
+
+      <NameInputDialog
+        open={nameDialogOpen}
+        onClose={() => setNameDialogOpen(false)}
+        onSubmit={handleNewTemplate}
+        title="Name your new template"
+        submitText="Create Template"
+      />
     </Box>
   );
 }
