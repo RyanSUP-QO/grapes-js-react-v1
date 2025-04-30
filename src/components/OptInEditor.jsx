@@ -17,8 +17,11 @@ export default function OptInEditor({ id }) {
       grapesjsCss="https://unpkg.com/grapesjs/dist/css/grapes.min.css"
       onEditor={(editor) => {
         console.log("Editor loaded", { editor });
+        const body = editor.DomComponents.getWrapper();
+        body.set({ droppable: false, badgeable: false });
       }}
       options={{
+        telemetry: false,
         height: "100vh",
         storageManager: {
           type: "local",
@@ -31,10 +34,55 @@ export default function OptInEditor({ id }) {
             },
           },
         },
-        // This setting makes style changes specific to instances of components using an id selector.
-        // selectorManager: {
-        //   componentFirst: true,
-        // },
+        // mediaCondition: "min-width",
+        deviceManager: {
+          devices: [
+            {
+              name: "Desktop",
+              width: "",
+            },
+            {
+              name: "Mobile",
+              width: "400px",
+              widthMedia: "799px",
+            },
+          ],
+        },
+        layerManager: {
+          root: ".container",
+          sortable: true,
+        },
+        selectorManager: {
+          // `componentFirst` makes style changes specific to instances of components using an id selector.
+          // componentFirst: true,
+          states: [
+            {
+              name: "hover",
+              label: "Hover",
+              pseudo: "hover",
+            },
+            {
+              name: "active",
+              label: "Click",
+              pseudo: "active",
+            },
+            {
+              name: "focus",
+              label: "Focus",
+              pseudo: "focus",
+            },
+            {
+              name: "focus-visible",
+              label: "Focus Visible",
+              pseudo: "focus-visible",
+            },
+            {
+              name: "visited",
+              label: "Visited",
+              pseudo: "visited",
+            },
+          ]
+        },
         pluginsOpts: {
           [QueenOneBlocks]: {
             template,
@@ -44,12 +92,14 @@ export default function OptInEditor({ id }) {
       plugins={[
         (editor) => {
           gjsForms(editor, {
+            // blocks: [],
             blocks: ["label"],
           });
         },
         (editor) => {
           gjsBasicBlocks(editor, {
-            blocks: ["text", "link", "image"],
+            // blocks: ["text", "link", "image"],
+            blocks: ["image"],
           });
         },
         QueenOneBlocks,

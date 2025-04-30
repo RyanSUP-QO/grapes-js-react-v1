@@ -1,15 +1,30 @@
+export const typeQoModalContainer = "qo-modal-container";
+export const typeQoModalOverlay = "qo-modal-overlay";
+export const typeQoModalDialogFrame = "qo-modal-dialog-frame";
+export const typeQoModalFloatingCloseButton = "qo-modal-floating-close-button";
+export const typeQoModalPrimaryContent = "qo-modal-primary-content";
+export const typeQoModalAccessibilityTitle = "qo-modal-accessibility-title";
+
 export default function (editor) {
   const dc = editor.DomComponents;
 
-  dc.addType("Container", {
+  dc.addType(typeQoModalContainer, {
     isComponent: (el) => el.classList?.contains("container"),
     model: {
       defaults: {
+        name: "Modal Container",
         tagName: "div",
+        removable: false,
+        draggable: false,
+        droppable: false,
+        highlightable: false,
+        hoverable: false,
+        badgable: false,
+        copyable: false,
+        locked: true,
         attributes: {
           class: "container",
-          // id: "qo-1234", // ! Adding ID breaks the dialog frame positioning??
-          "aria-labelledby": "initial-modal-title",
+          "aria-labelledby": "accessibility-title",
           "aria-hidden": "false", // ! We'll need to swap this to false when exporting - or maybe the script takes care of that?
         },
         styles: `
@@ -25,15 +40,24 @@ export default function (editor) {
             display: none;
           }
         `,
+        stylable: false,
       },
     },
   });
 
-  dc.addType("Overlay", {
+  dc.addType(typeQoModalOverlay, {
     isComponent: (el) => el.classList?.contains("overlay"),
     model: {
       defaults: {
+        name: "Overlay",
         tagName: "div",
+        removable: false,
+        draggable: false,
+        droppable: false,
+        highlightable: false,
+        hoverable: false,
+        copyable: false,
+        locked: false,
         attributes: {
           class: "overlay",
         },
@@ -44,15 +68,21 @@ export default function (editor) {
             background-color: rgba(0, 0, 0, 0.7);
           }
         `,
+        stylable: ["background-color"],
       },
     },
   });
 
-  dc.addType("Dialog Frame", {
+  dc.addType(typeQoModalDialogFrame, {
     isComponent: (el) => el.classList?.contains("dialog-frame"),
     model: {
       defaults: {
+        name: "Dialog Frame",
         tagName: "div",
+        removable: false,
+        draggable: false,
+        copyable: false,
+        locked: false,
         attributes: {
           class: "dialog-frame",
         },
@@ -61,16 +91,16 @@ export default function (editor) {
             position: relative; /* close button should be relative to the frame */
             z-index: 2; /* make sure the content frame sits on top of the overlay. */
             display: flex;
-            width: 320px;
-            min-height: 480px; /* min-height so that content can expand the height if necessary */
+            width: 800px;
+            min-height: 600px;
             margin: auto;
             background-color: #ffffff; /* default bg color */
           }
 
-          @media screen and (min-width: 800px) {
+          @media screen and (max-width: 799px) {
             .dialog-frame {
-              width: 800px;
-              min-height: 600px;
+              width: 320px;
+              min-height: 480px; /* min-height so that content can expand the height if necessary */
             }
           }
 
@@ -82,15 +112,20 @@ export default function (editor) {
     },
   });
 
-  dc.addType("Floating Close Button", {
+  dc.addType(typeQoModalFloatingCloseButton, {
     extend: "button",
     isComponent: (el) => el.classList?.contains("floating-close-button"),
     model: {
       defaults: {
+        name: "Floating Close Button",
         tagName: "button",
+        removable: false,
+        draggable: false,
+        droppable: false,
+        copyable: false,
+        classes: ["floating-close-button"],
         attributes: {
           type: "button",
-          class: "floating-close-button",
           "aria-label": "Close dialog",
           "data-a11y-dialog-hide": "",
         },
@@ -119,7 +154,7 @@ export default function (editor) {
             color: #ffffff;
           }
 
-          .floating-close-button:focus {
+          .floating-close-button:focus-visible {
             outline: none;
             background-color: #000000;
             color: #ffffff;
@@ -142,79 +177,91 @@ export default function (editor) {
             />
           </svg>
         `,
+        // Override default traits, we don't need text or type
+        traits: [],
       },
     },
   });
 
-  dc.addType("Prehead", {
-    extend: "text",
-    isComponent: (el) => el.classList?.contains("prehead"),
-    model: {
-      defaults: {
-        tagName: "span",
-        attributes: {
-          class: "prehead",
-        },
-        styles: `
-        .prehead {
-          display: block;
-          margin-bottom: 0.6em;
-          font-size: 0.36em;
-          text-transform: uppercase;
-        }
-      `,
-      },
-    },
-  });
-
-  dc.addType("Modal Title", {
-    extend: "text",
-    isComponent: (el) => el.classList?.contains("modal-title"),
-    model: {
-      defaults: {
-        tagName: "h2",
-        attributes: {
-          class: "modal-title",
-          tabindex: "-1",
-        },
-        styles: `
-          @media (max-width: 480px) {
-            .modal-title {
-              font-size: 16px
-          }
-      }
-        `,
-      },
-    },
-  });
-
-  dc.addType("Primary Content", {
+  dc.addType(typeQoModalPrimaryContent, {
     extend: "form",
     isComponent: (el) => el.classList?.contains("primary-content"),
     model: {
       defaults: {
+        name: "Primary Content",
         tagName: "form",
+        copyable: false,
+        removable: false,
         attributes: {
           class: "primary-content",
         },
         styles: `
-        .primary-content {
-          display: grid;
-          grid-auto-rows: max-content;
-          gap: 1.3rem;
-          width: 100%;
-          margin: auto;
-          padding: 20px 40px;
-          text-align: center;
-        }
-
-        @media screen and (min-width: 800px) {
           .primary-content {
+            display: grid;
+            grid-auto-rows: max-content;
+            gap: 1.3rem;
             width: 50%;
+            margin: auto;
+            padding: 20px 40px;
+            text-align: center;
           }
-        }
-      `,
+
+          @media screen and (max-width: 799px) {
+            .primary-content {
+              width: 100%;
+            }
+          }
+        `,
+        // Override default traits, we don't need method or name since we hard code them
+        traits: [],
       },
+    },
+  });
+
+  dc.addType(typeQoModalAccessibilityTitle, {
+    isComponent: (el) => el.classList?.contains("accessibility-title"),
+    model: {
+      defaults: {
+        name: "Accessibility Title",
+        tagName: "h2",
+        removable: false,
+        draggable: false,
+        droppable: false,
+        highlightable: false,
+        hoverable: false,
+        copyable: false,
+        locked: false,
+        classes: ["accessibility-title", "visuallyhidden"],
+        attributes: {},
+        text: "Accessibility Title",
+        traits: [
+          {
+            name: 'text',
+            changeProp: true,
+          },
+        ],
+        styles: `
+          .accessibility-title {
+            position: fixed;
+            inset: 0;
+          }
+        `,
+        stylable: false,
+      },
+
+      init() {
+          const comps = this.components();
+          const tChild =  comps.length === 1 && comps.models[0];
+          const chCnt = (tChild && tChild.is('textnode') && tChild.get('content')) || '';
+          const text = chCnt || this.get('text');
+          this.set('text', text);
+          this.on('change:text', this.__onTextChange);
+          (text !== chCnt) && this.__onTextChange();
+        },
+    
+        __onTextChange() {
+          this.components(this.get('text'));
+        },
     },
   });
 }

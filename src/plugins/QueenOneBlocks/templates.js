@@ -1,61 +1,94 @@
+import {
+  typeQoModalAbstractBox,
+} from "./components-simple";
+
+import {
+  typeQoModalContainer,
+  typeQoModalOverlay,
+  typeQoModalDialogFrame,
+  typeQoModalFloatingCloseButton,
+  typeQoModalPrimaryContent,
+  typeQoModalAccessibilityTitle,
+} from "./components-fixed";
+
+import {
+  typeQoModalInput,
+  typeQoModalButton,
+  typeQoModalUnstyledButton,
+} from "./components-inputs";
+
+import {
+  typeQoModalParagraphText,
+  typeQoModalPrehead,
+  typeQoModalHeader,
+} from "./components-text";
+
 const starterPrimaryContent = [
   {
-    type: "Modal Title",
+    type: typeQoModalHeader,
     components: [
-      { type: "Prehead", components: "Elevate Your Style" },
+      { type: typeQoModalPrehead, components: "Elevate Your Style" },
       "With 10% Off",
     ],
   },
   {
-    type: "text",
+    type: typeQoModalParagraphText,
     content: `Receive 10% off your first order when you join our email list
           along with special promotions, curated playlists, and first
           access to new products and limited runs.`,
   },
+  // {
+  //   type: "label",
+  //   classes: ["visuallyhidden"],
+  //   content: "Email (Required)",
+  //   id: "Testing",
+  // },
   {
-    type: "label",
-    classes: ["visuallyhidden"],
-    content: "Email (Required)",
-    id: "Testing",
+    type: typeQoModalInput,
+    attributes: {
+      name: "email",
+      type: "email",
+      placeholder: "Email address",
+      required: true,
+      autocomplete: "email",
+    },
   },
-  { type: "input", classes: ["form-wrapper-input", "input"] },
   {
-    type: "button",
-    classes: ["form-wrapper-submit", "button"],
-    text: "Submit",
+    type: typeQoModalButton,
+    text: "Next",
   },
   {
-    type: "button",
-    classes: ["unstyled-button"],
-    attributes: { "data-a11y-dialog-hide": "" },
+    type: typeQoModalUnstyledButton,
     text: "No thanks, I’m not into saving money.",
   },
 ];
 
 const singleLayout = {
-  type: "Container",
+  type: typeQoModalContainer,
   components: [
-    { type: "Overlay" },
+    { type: typeQoModalOverlay },
+    { type: typeQoModalAccessibilityTitle },
     {
-      type: "Dialog Frame",
+      type: typeQoModalDialogFrame,
       components: [
-        { type: "Floating Close Button" },
-        { type: "Primary Content", components: starterPrimaryContent },
+        { type: typeQoModalFloatingCloseButton },
+        { type: typeQoModalPrimaryContent, components: starterPrimaryContent },
       ],
     },
   ],
 };
 
 const twoColumnLayout = {
-  type: "Container",
+  type: typeQoModalContainer,
   components: [
-    { type: "Overlay" },
+    { type: typeQoModalOverlay },
+    { type: typeQoModalAccessibilityTitle },
     {
-      type: "Dialog Frame",
+      type: typeQoModalDialogFrame,
       components: [
-        { type: "Floating Close Button" },
-        { tagName: "div", style: { flex: 1 } },
-        { type: "Primary Content", components: starterPrimaryContent },
+        { type: typeQoModalFloatingCloseButton },
+        { type: typeQoModalAbstractBox, style: { flex: 1 } },
+        { type: typeQoModalPrimaryContent, components: starterPrimaryContent },
       ],
     },
   ],

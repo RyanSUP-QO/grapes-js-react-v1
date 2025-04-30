@@ -1,4 +1,7 @@
-import defineCustomComponentTypes from "./components";
+import defineAbstractComponentTypes from "./components-simple";
+import defineFixedComponentTypes from "./components-fixed";
+import defineTextComponentTypes from "./components-text";
+import defineInputComponentTypes from "./components-inputs";
 import addBlocks from "./blocks";
 import templates from "./templates";
 
@@ -57,33 +60,11 @@ table {
   box-sizing: border-box;
 }
 
-.initial-modal-title {
-  position: fixed;
-  inset: 0;
-}
-
-.modal-title:focus {
-  outline: none;
+label {
+  text-align: left;
 }
 
 /* Queen One Utility Styles */
-
-.unstyled-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  font-size: inherit;
-}
-
-.unstyled-button:focus,
-.unstyled-button:hover {
-  outline: none;
-  text-decoration: underline;
-}
 
 .visuallyhidden {
   clip: rect(0 0 0 0);
@@ -125,55 +106,32 @@ table {
   }
 }
 
-.input {
-  padding: 0.6rem;
-  border: 1px solid #000000;
-  border-radius: 4px;
-  font-size: 16px; /* 16px to avoid mobile zoom */
+p {
+  line-height: 1.5;
 }
 
-.input:hover {
-  border-color: rgba(0, 0, 0, 0.5);
-}
-
-.input:focus-visible {
-  outline: none;
-  border-color: #000000;
-  animation: hover-shadow 4s linear infinite;
-  box-shadow: 0 0 0 2px #ffffff, -2px -2px 6px 3px 6px 3px #7a36fd,
-    2px 2px 6px 3px 6px 3px #ee4484;
-}
-
-.button {
-  padding: 0.6rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #000000;
-  color: #ffffff;
-  font-size: inherit;
+a {
+  color:hsl(261, 98.00%, 60.20%);
+  text-decoration: underline;
+  border-radius: 3px;
   cursor: pointer;
 }
 
-.button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+a:visited {
+  color:hsl(261, 98.00%, 60.20%);
 }
 
-.button:focus {
+a:hover,
+a:active {
+  color:hsl(261, 98.00%, 40.20%);
+}
+
+a:focus-visible {
   outline: none;
-  background-color: #000000;
+  box-shadow: 0 0  2px 2px hsl(261, 98.00%, 40.20%);
   animation: hover-shadow 4s linear infinite;
   box-shadow: 0 0 0 2px #ffffff, -2px -2px 6px 3px 6px 3px #7a36fd,
     2px 2px 6px 3px 6px 3px #ee4484;
-}
-
-h2 {
-  font-size: 50px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-p {
-  line-height: 1.5;
 }
 
 .legal {
@@ -202,6 +160,9 @@ export default function (editor, opts = {}) {
     }
   });
 
-  defineCustomComponentTypes(editor);
+  defineAbstractComponentTypes(editor);
+  defineFixedComponentTypes(editor);
+  defineTextComponentTypes(editor);
+  defineInputComponentTypes(editor);
   addBlocks(editor);
 }
