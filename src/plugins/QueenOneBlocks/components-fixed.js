@@ -113,7 +113,7 @@ export default function (editor) {
   });
 
   dc.addType(typeQoModalFloatingCloseButton, {
-    extend: "button",
+    extend: "button", // use the abstract button
     isComponent: (el) => el.classList?.contains("floating-close-button"),
     model: {
       defaults: {

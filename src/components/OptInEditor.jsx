@@ -18,7 +18,7 @@ export default function OptInEditor({ id }) {
       onEditor={(editor) => {
         console.log("Editor loaded", { editor });
         const body = editor.DomComponents.getWrapper();
-        body.set({ droppable: false, badgeable: false });
+        body.set({ droppable: false, badgable: false, highlightable: false, });
       }}
       options={{
         telemetry: false,
