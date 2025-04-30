@@ -1,11 +1,10 @@
 import { Route, Routes, useLocation, useParams } from "react-router";
 import OptInEditor from "./OptInEditor";
-import TriggerDashboard from "../pages/TriggerDashboard";
 import { motion } from "motion/react";
-
-import TemplateSelect from "../pages/TemplateSelect";
 import { AnimatePresence } from "motion/react";
 import CurtainAnimation from "./CurtainAnimation";
+import Templates from "../pages/Templates";
+import Optins from "../pages/Optins";
 
 function FadeInAnimationWrapper({ children }) {
   return (
@@ -40,22 +39,20 @@ export default function AnimatedRoutes() {
           path="/"
           element={
             <FadeInAnimationWrapper>
-              <TriggerDashboard />
+              <Templates />
             </FadeInAnimationWrapper>
           }
         />
         <Route
-          path="/templates"
+          path="/optins"
           element={
             <FadeInAnimationWrapper>
-              <TemplateSelect />
+              <Optins />
             </FadeInAnimationWrapper>
           }
         />
-        <Route
-          path="/build/:id"
-          element={<BuildRouteWrapper />}
-        />
+        <Route path="/build/:id" element={<BuildRouteWrapper />} />
+        <Route path="/build" element={<BuildRouteWrapper />} />
       </Routes>
     </AnimatePresence>
   );

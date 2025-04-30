@@ -1,16 +1,11 @@
 import grapesjs from "grapesjs";
 import gjsForms from "grapesjs-plugin-forms";
 import gjsBasicBlocks from "grapesjs-blocks-basic";
-import GjsEditor, { Canvas } from "@grapesjs/react";
+import GjsEditor from "@grapesjs/react";
 
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
-import { useSearchParams } from "react-router";
-
+import QueenOneTemplates from "../plugins/QueenOneTemplates";
 export default function OptInEditor({ id }) {
-  const [searchParams] = useSearchParams();
-  const template = searchParams.get("template");
-  const localStorageKey = `qo-${id}`;
-
   return (
     <GjsEditor
       grapesjs={grapesjs}
@@ -18,21 +13,14 @@ export default function OptInEditor({ id }) {
       onEditor={(editor) => {
         console.log("Editor loaded", { editor });
         const body = editor.DomComponents.getWrapper();
-        body.set({ droppable: false, badgable: false, highlightable: false, });
+        body.set({ droppable: false, badgable: false, highlightable: false });
       }}
       options={{
         telemetry: false,
         height: "100vh",
         storageManager: {
-          type: "local",
-          autosave: true,
-          autoload: true,
-          stepsBeforeSave: 1,
-          options: {
-            local: {
-              key: localStorageKey,
-            },
-          },
+          type: "supabase",
+          autosave: false,
         },
         // mediaCondition: "min-width",
         deviceManager: {
@@ -81,11 +69,11 @@ export default function OptInEditor({ id }) {
               label: "Visited",
               pseudo: "visited",
             },
-          ]
+          ],
         },
         pluginsOpts: {
-          [QueenOneBlocks]: {
-            template,
+          [QueenOneTemplates]: {
+            id,
           },
         },
       }}
@@ -102,6 +90,7 @@ export default function OptInEditor({ id }) {
             blocks: ["image"],
           });
         },
+        QueenOneTemplates,
         QueenOneBlocks,
       ]}
       waitReady
