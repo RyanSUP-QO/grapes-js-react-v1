@@ -2,6 +2,16 @@ import StudioEditor from "@grapesjs/studio-sdk/react";
 import { layoutSidebarButtons } from "@grapesjs/studio-sdk-plugins";
 import "@grapesjs/studio-sdk/style";
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
+import supabase from "../utils/supabase";
+
+async function loadTemplates() {
+  let { data, error } = await supabase
+    .from("studio-sdk-templates")
+    .select("id, name, data, author");
+  console.log(data);
+  if (error) return [];
+  return data;
+}
 
 export default function GrapesStudioSDK() {
   return (
@@ -12,50 +22,45 @@ export default function GrapesStudioSDK() {
         project: {
           type: "web",
         },
-        assets: {
-          storageType: "self",
-          // Provide a custom upload handler for assets
-          onUpload: async ({ files }) => {
-            const body = new FormData();
-            for (const file of files) {
-              body.append("files", file);
-            }
-            const response = await fetch("ASSETS_UPLOAD_URL", {
-              method: "POST",
-              body,
-            });
-            const result = await response.json();
-            // The expected result should be an array of assets, eg.
-            // [{ src: 'ASSET_URL' }]
-            return result;
-          },
-          // Provide a custom handler for deleting assets
-          onDelete: async ({ assets }) => {
-            const body = JSON.stringify(assets);
-            await fetch("ASSETS_DELETE_URL", { method: "DELETE", body });
+        templates: {
+          // return empty array
+          onLoad: loadTemplates,
+        },
+        i18n: {
+          locales: {
+            en: {
+              templates: {
+                notFound: "No templates found",
+              },
+            },
           },
         },
-        storage: {
-          type: "self",
-          // Provide a custom handler for saving the project data.
-          onSave: async ({ project }) => {
-            throw new Error('Implement your "onSave"!');
-            // const body = new FormData();
-            // body.append("project", JSON.stringify(project));
-            // await fetch("PROJECT_SAVE_URL", { method: "POST", body });
-          },
-          // Provide a custom handler for loading project data.
-          onLoad: async () => {
-            throw new Error('Implement your "onLoad"!');
-            // const response = await fetch("PROJECT_LOAD_URL");
-            // const project = await response.json();
-            // // The project JSON is expected to be returned inside an object.
-            // return { project };
-          },
-          autosaveChanges: 100,
-          autosaveIntervalMs: 10000,
-        },
-        plugins: [layoutSidebarButtons.init(), QueenOneBlocks],
+        plugins: [
+          layoutSidebarButtons.init(),
+          QueenOneBlocks,
+          (editor) =>
+            editor.onReady(() => {
+              editor.runCommand("studio:layoutToggle", {
+                id: "my-templates-panel",
+                header: false,
+                placer: {
+                  type: "dialog",
+                  title: "Choose a template for your project",
+                  size: "l",
+                },
+                layout: {
+                  type: "panelTemplates",
+                  content: { itemsPerRow: 3 },
+                  onSelect: ({ loadTemplate, template }) => {
+                    loadTemplate(template);
+                    editor.runCommand("studio:layoutRemove", {
+                      id: "my-templates-panel",
+                    });
+                  },
+                },
+              });
+            }),
+        ],
       }}
     />
   );
