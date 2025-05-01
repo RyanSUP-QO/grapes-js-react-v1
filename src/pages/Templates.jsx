@@ -2,10 +2,8 @@ import * as React from "react";
 import { useNavigate } from "react-router";
 import { Button, Box, Typography } from "@mui/material";
 import { AnimatePresence, motion } from "motion/react";
-import { useTemplates } from "../hooks/useTemplates";
+import { useStudioSDKTemplates } from "../hooks/useStudioSDKTemplates";
 import SupabaseTemplateCard from "../components/SupabaseTemplateCard";
-import NameInputDialog from "../components/NameInputDialog";
-import supabase from "../utils/supabase";
 
 const templateVariants = {
   show: {
@@ -26,31 +24,8 @@ const templateVariants = {
 };
 
 export default function Templates() {
-  const templates = useTemplates(true);
+  const templates = useStudioSDKTemplates();
   const navigate = useNavigate();
-  const [nameDialogOpen, setNameDialogOpen] = React.useState(false);
-
-  const handleNewTemplate = async (name) => {
-    const { data: blankTemplate } = await supabase
-      .from("templates")
-      .select("data,html,css")
-      .eq("id", 6) // 6 is the blank "master" template.
-      .single();
-
-    const { data: newTemplate } = await supabase
-      .from("templates")
-      .insert([
-        {
-          is_template: true,
-          name,
-          ...blankTemplate,
-        },
-      ])
-      .select("id")
-      .single();
-
-    navigate(`/build/${newTemplate.id}`);
-  };
 
   return (
     <Box
@@ -71,7 +46,7 @@ export default function Templates() {
           exit={{ opacity: 0, scale: 0.9 }}
         >
           <Button
-            onClick={() => setNameDialogOpen(true)}
+            onClick={() => navigate(`/build`)}
             variant="contained"
             sx={{ flexGrow: 1 }}
             size="large"
@@ -79,6 +54,7 @@ export default function Templates() {
             New Template
           </Button>
         </motion.div>
+
         <Box
           flexGrow={1}
           width={"100%"}
@@ -95,17 +71,17 @@ export default function Templates() {
           }}
         >
           <AnimatePresence>
-            {templates.map(({ id, name }) => (
+            {templates.map((t) => (
               <motion.li
-                key={id}
+                key={t.id}
                 variants={templateVariants}
                 initial="show"
                 exit="exit"
                 whileHover="hover"
               >
-                <SupabaseTemplateCard name={name}>
+                <SupabaseTemplateCard template={t}>
                   <Button
-                    onClick={() => navigate(`/build/${id}`)}
+                    onClick={() => navigate(`/build/${t.id}`)}
                     variant="outlined"
                     sx={{ borderStyle: "dashed", flexGrow: 1 }}
                   >
@@ -117,14 +93,6 @@ export default function Templates() {
           </AnimatePresence>
         </Box>
       </AnimatePresence>
-
-      <NameInputDialog
-        open={nameDialogOpen}
-        onClose={() => setNameDialogOpen(false)}
-        onSubmit={handleNewTemplate}
-        title="Name your new template"
-        submitText="Create Template"
-      />
     </Box>
   );
 }

@@ -25,8 +25,8 @@ function BuildRouteWrapper() {
   const { id } = useParams();
   return (
     <>
-      <CurtainAnimation />
-      <OptInEditor id={id} />
+      {/* <CurtainAnimation /> */}
+      <GrapesStudioSDK id={id} />
     </>
   );
 }
@@ -54,8 +54,6 @@ export default function AnimatedRoutes() {
         />
         <Route path="/build/:id" element={<BuildRouteWrapper />} />
         <Route path="/build" element={<BuildRouteWrapper />} />
-
-        <Route path="/studio" element={<GrapesStudioSDK />} />
       </Routes>
     </AnimatePresence>
   );
