@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import CurtainAnimation from "./CurtainAnimation";
 import Templates from "../pages/Templates";
 import Optins from "../pages/Optins";
+import GrapesStudioSDK from "./GrapesStudioSDK";
 
 function FadeInAnimationWrapper({ children }) {
   return (
@@ -53,6 +54,8 @@ export default function AnimatedRoutes() {
         />
         <Route path="/build/:id" element={<BuildRouteWrapper />} />
         <Route path="/build" element={<BuildRouteWrapper />} />
+
+        <Route path="/studio" element={<GrapesStudioSDK />} />
       </Routes>
     </AnimatePresence>
   );

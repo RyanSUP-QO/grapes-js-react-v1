@@ -13,6 +13,8 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@grapesjs/react": "^2.0.0",
+    "@grapesjs/studio-sdk": "^1.0.42",
+    "@grapesjs/studio-sdk-plugins": "^1.0.19",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@supabase/supabase-js": "^2.49.4",

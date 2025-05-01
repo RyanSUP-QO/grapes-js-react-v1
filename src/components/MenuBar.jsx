@@ -12,6 +12,9 @@ export default function MenuBar() {
         <Button onClick={() => navigate("/")} color="inherit">
           Templates
         </Button>
+        <Button onClick={() => navigate("/studio")} color="inherit">
+          Studio Demo
+        </Button>
       </Toolbar>
     </AppBar>
   );
