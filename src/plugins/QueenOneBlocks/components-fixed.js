@@ -65,10 +65,11 @@ export default function (editor) {
           .overlay {
             position: fixed;
             inset: 0;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #000000;
+            opacity: 0.7;
           }
         `,
-        stylable: ["background-color"],
+        stylable: ["background-color", "opacity"],
       },
     },
   });
