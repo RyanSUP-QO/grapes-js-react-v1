@@ -39,6 +39,7 @@ export default function OptInEditor({ id }) {
         layerManager: {
           root: ".container",
           sortable: true,
+          showWrapper: false,
         },
         selectorManager: {
           // `componentFirst` makes style changes specific to instances of components using an id selector.

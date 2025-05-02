@@ -68,10 +68,12 @@ export default function (editor) {
   editor.Blocks.add("qo-modal-email-input", {
     label: "Email Input",
     category: "Inputs",
+    resetId: false,
     content: {
       type: typeQoModalInput,
       attributes: {
         name: "email",
+        id: "email-input",
         type: "email",
         placeholder: "Email address",
         required: true,
@@ -83,10 +85,12 @@ export default function (editor) {
   editor.Blocks.add("qo-modal-phone-input", {
     label: "Phone Input",
     category: "Inputs",
+    resetId: false,
     content: {
       type: typeQoModalInput,
       attributes: {
         name: "phone",
+        id: "phone-input",
         type: "tel",
         placeholder: "(201) 555 - 0123",
         required: true,
