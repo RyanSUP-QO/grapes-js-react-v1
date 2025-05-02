@@ -23,6 +23,7 @@ export default function (editor) {
       defaults: {
         attributes: {},
         traits: [
+          "id",
           "name",
           "placeholder",
           {
