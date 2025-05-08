@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import "./style.css";
 import { Box } from "@mui/material";
 import MenuBar from "./components/MenuBar";
 import AnimatedRoutes from "./components/AnimatedRoutes";

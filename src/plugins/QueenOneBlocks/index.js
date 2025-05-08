@@ -144,6 +144,9 @@ a:focus-visible {
 
 export default function (editor) {
   console.log("Initializing QueenOneBlocks plugin");
+  console.log("Resetting studio SDK block");
+  editor.Blocks.getAll().reset();
+  
   editor.on("load", () => {
     console.log("Adding Queen One Reset Styles");
     editor.addStyle(queenOneResetStyles);
