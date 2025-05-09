@@ -1,11 +1,8 @@
 import { Route, Routes, useLocation, useParams } from "react-router";
-import OptInEditor from "./OptInEditor";
 import { motion } from "motion/react";
 import { AnimatePresence } from "motion/react";
-import CurtainAnimation from "./CurtainAnimation";
-import Templates from "../pages/Templates";
-import Optins from "../pages/Optins";
 import GrapesStudioSDK from "./GrapesStudioSDK";
+import Landing from "../pages/Landing";
 
 function FadeInAnimationWrapper({ children }) {
   return (
@@ -36,23 +33,8 @@ export default function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <FadeInAnimationWrapper>
-              <Templates />
-            </FadeInAnimationWrapper>
-          }
-        />
-        <Route
-          path="/optins"
-          element={
-            <FadeInAnimationWrapper>
-              <Optins />
-            </FadeInAnimationWrapper>
-          }
-        />
-        <Route path="/build/:id" element={<BuildRouteWrapper />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/build/:siteId/:id" element={<BuildRouteWrapper />} />
         <Route path="/build" element={<BuildRouteWrapper />} />
       </Routes>
     </AnimatePresence>
