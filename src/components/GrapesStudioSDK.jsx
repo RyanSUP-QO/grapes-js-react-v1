@@ -1,7 +1,7 @@
 import StudioEditor from "@grapesjs/studio-sdk/react";
 import { layoutSidebarButtons } from "@grapesjs/studio-sdk-plugins";
 import "@grapesjs/studio-sdk/style";
-import InputListPanel from "./InputListPanel";
+import InputListPanel from "../plugins/ListSelection/InputListPanel";
 import ListSelection from "../plugins/ListSelection";
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
 import starterTemplates from "../plugins/QueenOneBlocks/templates";
@@ -53,10 +53,12 @@ export default function GrapesStudioSDK() {
             autosaveChanges: 5, // save after every 5 changes
 
             onSave: async ({ project, editor }) => {
+              console.log(project);
               extractFormDataFromGrapes(project, editor);
             },
 
             onLoad: async () => {
+              // TODO: Extract listID for each page on load of new
               return {
                 project: {
                   pages: [

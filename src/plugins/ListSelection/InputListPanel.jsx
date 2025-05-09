@@ -13,60 +13,50 @@ export default function ListSelectionPanel({ editor }) {
 
   useEffect(() => {
     if (!editor) return;
-    const lookForInputComponent = () => {
-      const wrapper = editor.getWrapper();
-      if (!wrapper) return;
 
-      const hasInputComponent = (components) => {
-        return components.some((comp) => {
-          const tag = comp.get("tagName")?.toLowerCase();
-          return (
-            // Is this component an input?
-            ["input", "textarea", "select"].includes(tag) ||
-            // or is a child of this component an input?
-            (comp.components().length > 0 &&
-              hasInputComponent(comp.components()))
-          );
-        });
-      };
-
-      setHasInput(hasInputComponent(wrapper.components()));
+    // Currently hard-coded to look for a specific input. Can be extended if we want to support more.
+    const checkForInputOnCurrentPage = () => {
+      const currentPage = editor.Pages.getSelected();
+      const inputComponent = currentPage
+        .getMainComponent()
+        .findType("qo-modal-input");
+      setHasInput(!!inputComponent);
     };
 
-    // Update on initial load of the panel
-    lookForInputComponent();
-
-    // Set initial list if the page has it.
+    // Set initial list in panel if the page has a targetList.
     const initialList = editor.Pages.getSelected().get("targetList");
     if (initialList) {
       setSelectedList(initialList);
     }
 
-    // Bind once on load
-    editor.on("load", lookForInputComponent);
+    // On initial load of the panel
+    checkForInputOnCurrentPage();
 
     // Update on component changes
-    editor.on("component:add", lookForInputComponent);
-    editor.on("component:remove", lookForInputComponent);
-    editor.on("component:update", lookForInputComponent);
+    editor.on("component:add", checkForInputOnCurrentPage);
+    editor.on("component:remove", checkForInputOnCurrentPage);
+    editor.on("component:update", checkForInputOnCurrentPage);
 
     // Update when changing between pages
-    editor.on("page:select", lookForInputComponent);
+    editor.on("page:select", checkForInputOnCurrentPage);
 
     // Cleanup
     return () => {
-      editor.off("load", lookForInputComponent);
-      editor.off("component:add", lookForInputComponent);
-      editor.off("component:remove", lookForInputComponent);
-      editor.off("component:update", lookForInputComponent);
-      editor.off("page:select", lookForInputComponent);
+      editor.off("component:add", checkForInputOnCurrentPage);
+      editor.off("component:remove", checkForInputOnCurrentPage);
+      editor.off("component:update", checkForInputOnCurrentPage);
+      editor.off("page:select", checkForInputOnCurrentPage);
     };
   }, [editor]);
 
   function handleSelectList(event) {
     editor.Commands.run("lists:add-list-to-page", {
-      targetPageId: editor.Pages.getSelected().getId(),
-      targetList: event.target.value,
+      pageId: editor.Pages.getSelected().getId(),
+      listId: event.target.value,
+    });
+    console.log({
+      pageId: editor.Pages.getSelected().getId(),
+      listId: event.target.value,
     });
     setSelectedList(event.target.value);
   }
