@@ -33,35 +33,37 @@ export default function (project, editor) {
     };
   });
 
-  const output = {
-    active: "false",
-    siteId: "YOUR SITE ID HERE", // TODO get siteID
-    name: "NEW OPTIN PROJECT", // TODO get name
+  const optin = {
+    id: "681e43c51c2c1d022dd9b4b1",
+    active: false,
+    siteId: "barOBvW", // TODO get siteID
+    name: "Test - Ryan", // TODO get name
     mode: Modes.MODAL, // Currently the only supported mode
-    embedTarget: undefined, // Currently not supported,
+    // embedTarget: undefined, // Currently not supported,
     overlay,
     timeout: { active: false, value: 0 },
     idleTimeout: { active: false, value: 0 },
     wait: { active: true, value: 6000 },
-    formClose: { active: false, formId: "", wait: 0 },
+    formClose: { active: false, wait: 0 },
     mouseleave: { active: true },
-    onClick: { active: false, selector: "" },
+    onClick: { active: false },
     cookieExpiration: 10080,
     center: true, // Depricated
     // TODO Support fonts
     font: {
-      families: "",
-      urls: "",
+      families: [],
+      urls: [],
     },
     // TODO Support animations
-    animate: { active: true, in: "fadeIn", out: "fadeOut" },
+    animate: { active: false },
     // TODO Support triggers
     triggerRules: [],
     steps,
     grapesProjectData: JSON.stringify(project),
   };
-  console.log("output: ", output);
-  return output;
+  console.log("optin: ", optin);
+
+  return optin;
 }
 
 function rgbaToHexAndOpacity(rgba) {

@@ -23,8 +23,8 @@ export default function ListSelectionPanel({ editor }) {
       setHasInput(!!inputComponent);
     };
 
-    // Set initial list in panel if the page has a targetList.
-    const initialList = editor.Pages.getSelected().get("targetList");
+    // Set initial list in panel if the page has a listId.
+    const initialList = editor.Pages.getSelected().get("listId");
     if (initialList) {
       setSelectedList(initialList);
     }
@@ -65,7 +65,7 @@ export default function ListSelectionPanel({ editor }) {
     <Box sx={{ p: 2 }}>
       {hasInput ? (
         <FormControl fullWidth>
-          <InputLabel id="list-selection-label">Select List</InputLabel>
+          <InputLabel id="list-selection-label">Select Customer List</InputLabel>
           <Select
             labelId="list-selection-label"
             value={selectedList}

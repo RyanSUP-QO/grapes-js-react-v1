@@ -6,6 +6,66 @@ import ListSelection from "../plugins/ListSelection";
 import QueenOneBlocks from "../plugins/QueenOneBlocks";
 import starterTemplates from "../plugins/QueenOneBlocks/templates";
 import extractFormDataFromGrapes from "../utils/extractFormDataFromGrapes";
+import { formDemo } from "../utils/demoFormsOutput";
+
+const siteId = "barOBvW";
+const baseUrl = `https://staging-optins-backend-8592.encr.app/api/v1/${siteId}/config`;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`${baseUrl}/681e43c51c2c1d022dd9b4b1`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json(); // or response.text(), etc.
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+}
+
+async function createNewOptin(name) {
+  try {
+    const response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("Server response:", result);
+  } catch (error) {
+    console.error("Error during POST:", error);
+  }
+}
+
+async function updateOptin(data) {
+  try {
+    const response = await fetch(`${baseUrl}/681e43c51c2c1d022dd9b4b1`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("Server response:", result);
+  } catch (error) {
+    console.error("Error during POST:", error);
+  }
+}
 
 function addListsAndTriggersToSidebarButtons(
   sidebarButtons,
@@ -51,23 +111,19 @@ export default function GrapesStudioSDK() {
           storage: {
             type: "self",
             autosaveChanges: 5, // save after every 5 changes
-
             onSave: async ({ project, editor }) => {
               console.log(project);
-              extractFormDataFromGrapes(project, editor);
+              const data = extractFormDataFromGrapes(project, editor);
+              await updateOptin(data);
             },
-
             onLoad: async () => {
-              // TODO: Extract listID for each page on load of new
+              const project = await fetchData();
+              const grapesProjectData = JSON.parse(
+                project.optin.grapesProjectData
+              );
               return {
-                project: {
-                  pages: [
-                    {
-                      name: "Step 1",
-                      component: starterTemplates["single-column"],
-                    },
-                  ],
-                },
+                project:
+                  grapesProjectData || JSON.parse(formDemo.grapesProjectData),
               };
             },
           },
